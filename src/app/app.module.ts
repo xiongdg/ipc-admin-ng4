@@ -9,7 +9,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 
-
+import { HttpService } from './service/http.service';
+import { StoreService } from './service/store.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { appRoutes } from './app.routes';
     NgZorroAntdModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [],
+  providers: [HttpService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

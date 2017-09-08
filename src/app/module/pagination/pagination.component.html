@@ -1,3 +1,5 @@
-<p>
-  pagination works!
-</p>
+<div class="my-pagination">
+  <button nz-button [nzType]="'default'" (click)="pageChange(-1)" [disabled]="!preCanUse"><i class=" anticon anticon-left"></i></button>
+  <span>&nbsp; {{currentPage}}&nbsp; </span>
+  <button nz-button [nzType]="'default'" (click)="pageChange(1)" [disabled]="!nextCanUse"><i class=" anticon anticon-right"></i></button>
+</div>
