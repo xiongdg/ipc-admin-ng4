@@ -1,5 +1,9 @@
 <div class="my-pagination">
   <button nz-button [nzType]="'default'" (click)="pageChange(-1)" [disabled]="!preCanUse"><i class=" anticon anticon-left"></i></button>
-  <span>&nbsp; {{currentPage}}&nbsp; </span>
+  <span>&nbsp; {{_currentPage}}&nbsp; </span>
   <button nz-button [nzType]="'default'" (click)="pageChange(1)" [disabled]="!nextCanUse"><i class=" anticon anticon-right"></i></button>
+  &nbsp;&nbsp;&nbsp;
+  每页&nbsp;&nbsp;<nz-select style="width: 60px;" [(ngModel)]="_itemPerPage" (ngModelChange)="itemChange()" [nzPlaceHolder]="'每页条数'">
+    <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+  </nz-select>&nbsp;&nbsp;条
 </div>

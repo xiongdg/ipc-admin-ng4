@@ -7,3 +7,7 @@
 }
 
 .pagination{line-height: 50px;}
+
+nz-input{width:200px;}
+.reg_time{padding: 0 5px 0 10px;}
+.do_search{padding: 0 15px !important;}

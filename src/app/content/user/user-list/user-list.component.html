@@ -6,7 +6,22 @@
     <nz-breadcrumb-item> 用户列表 </nz-breadcrumb-item>
   </nz-breadcrumb>
 </div>
+<div style="margin-bottom:20px;">
+  <nz-input [(ngModel)]="queryData.query" [nzPlaceHolder]="'邮箱/手机/昵称'" [nzSize]="'large'"></nz-input>
+  <nz-select style="width: 200px;" nzAllowClear [nzPlaceHolder]="'用户状态'" [(ngModel)]="queryData.userNameStatus" [nzShowSearch]="true">
+    <nz-option *ngFor="let option of userNameStatuses" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+    </nz-option>
+  </nz-select>
 
+  <span class="reg_time">注册时间:</span><nz-datepicker style="width: 250px" (ngModelChange)="queryData.startTime=$event;_startValueChange()" 
+  [ngModel]="queryData.startTime" [nzDisabledDate]="_disabledStartDate" [nzShowTime]="true" 
+  [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'"></nz-datepicker>
+
+  <nz-datepicker style="width: 250px" (ngModelChange)="queryData.endTime=$event;_endValueChange()" 
+  [ngModel]="queryData.endTime" [nzDisabledDate]="_disabledEndDate" [nzShowTime]="queryData.endTime" 
+  [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
+  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-search" (click)="doSearch()"></i></button>
+</div>
 <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzBordered]="_bordered" [nzLoading]="_loading" [nzIsPagination]="_pagination"
   [nzShowFooter]="_footer" [nzShowTitle]="_title" [nzSize]="_size" [nzLoading]="_loading">
   <thead nz-thead *ngIf="_header">
@@ -21,8 +36,8 @@
   </thead>
   <tbody nz-tbody>
     <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-      <td nz-td>{{data.user_name}}</td>
-      <td nz-td>{{data.user_name_status}}</td>
+      <td nz-td>{{data.email}}</td>
+      <td nz-td>{{data.mobile}}</td>
       <td nz-td>{{data.userName}}</td>
       <td nz-td>{{data.userNameStatus}}</td>
       <td nz-td>{{data.createDate}}</td>
@@ -31,12 +46,7 @@
   </tbody>
 </nz-table>
 <div class="pagination">
-  <!-- _pageChange由子组件点击按钮触发，会将新页码传递过来 -->
-  <my-pagination (_pageChange)="pageChange($event)" [nextCanUse]="nextCanUse" [currentPage]="_current"></my-pagination>
-  <nz-select style="width: 60px;" [(ngModel)]="_itemPerPage">
-    <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
-  </nz-select>
-  <button nz-button [nzType]="'primary'" (click)="changeItemPerPage()" [disabled]="!_itemPerPage">
-      <span>确定</span>
-    </button>
+  <!-- _pageChange由子组件点击按钮触发,触发父组件更新数据 -->
+  <!-- refreshData获取新数据、nextCanUse设置下一页按钮是否可用、_currentPage当前页码、_itemPerPage每页条数 -->
+  <my-pagination (refreshData)="refreshData($event)" [nextCanUse]="nextCanUse" [(_currentPage)]="queryData.startPage" [(_itemPerPage)]="queryData.itemPerPage_userList"></my-pagination>
 </div>
