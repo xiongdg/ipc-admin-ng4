@@ -32,6 +32,7 @@
       <th nz-th><span>状态</span></th>
       <th nz-th><span>注册时间</span></th>
       <th nz-th><span>最后登录时间</span></th>
+      <th nz-th><span>操作</span></th>
     </tr>
   </thead>
   <tbody nz-tbody>
@@ -42,6 +43,7 @@
       <td nz-td>{{data.userNameStatus}}</td>
       <td nz-td>{{data.createDate}}</td>
       <td nz-td>{{data.dataDate}}</td>
+      <td nz-td style="text-align:center;"><i [routerLink]="'/user-info/'+data.accountId" class="anticon anticon-login" style="cursor: pointer;color:cornflowerblue;"></i></td>
     </tr>
   </tbody>
 </nz-table>

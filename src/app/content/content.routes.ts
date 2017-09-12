@@ -22,7 +22,7 @@ export const contentRoutes = [
       { path: '', redirectTo: 'lamp-status' },
       { path: 'lamp-status', component: LampStatusComponent },
       {path: 'user-list', component: UserListComponent},
-      {path: 'user-info', component: UserInfoComponent},
+      {path: 'user-info/:id', component: UserInfoComponent},
       {path: 'add-user', component: AddUserComponent},
       {path: 'dev-list', component: DevListComponent},
       {path: 'dev-info', component: DevInfoComponent},
