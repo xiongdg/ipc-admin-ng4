@@ -22,7 +22,7 @@ import { StoreService } from './service/store.service';
     HttpModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
   ],
   providers: [HttpService, StoreService],
   bootstrap: [AppComponent]

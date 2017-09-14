@@ -54,10 +54,8 @@ export class UserListComponent implements OnInit {
     this.getData();
   }
   getData() {
-    console.log(this.queryData);
     this.httpService.getData('/appPath/user/queryUserList.do', this.queryData) // 刷新数据
       .subscribe((data) => {
-        console.log(data);
         this._loading = false;
         if (data.data.users.length < Number(this.queryData.itemPerPage_userList)) {
           this.nextCanUse = false;

@@ -8,19 +8,21 @@
 </div>
 <div style="margin-bottom:20px;">
   <nz-input [(ngModel)]="queryData.query" [nzPlaceHolder]="'邮箱/手机/昵称'" [nzSize]="'large'"></nz-input>
-  <nz-select style="width: 200px;" nzAllowClear [nzPlaceHolder]="'用户状态'" [(ngModel)]="queryData.userNameStatus" [nzShowSearch]="true">
+  <nz-select nzAllowClear [nzPlaceHolder]="'用户状态'" [(ngModel)]="queryData.userNameStatus" [nzShowSearch]="true">
     <nz-option *ngFor="let option of userNameStatuses" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
     </nz-option>
   </nz-select>
 
-  <span class="reg_time">注册时间:</span><nz-datepicker style="width: 250px" (ngModelChange)="queryData.startTime=$event;_startValueChange()" 
+  <span class="reg_time">注册时间:</span>
+  <nz-datepicker (ngModelChange)="queryData.startTime=$event;_startValueChange()" 
   [ngModel]="queryData.startTime" [nzDisabledDate]="_disabledStartDate" [nzShowTime]="true" 
   [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'"></nz-datepicker>
 
-  <nz-datepicker style="width: 250px" (ngModelChange)="queryData.endTime=$event;_endValueChange()" 
+  <nz-datepicker (ngModelChange)="queryData.endTime=$event;_endValueChange()" 
   [ngModel]="queryData.endTime" [nzDisabledDate]="_disabledEndDate" [nzShowTime]="queryData.endTime" 
   [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
   <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-search" (click)="doSearch()"></i></button>
+  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-plus" routerLink="/add-user"></i></button>
 </div>
 <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzBordered]="_bordered" [nzLoading]="_loading" [nzIsPagination]="_pagination"
   [nzShowFooter]="_footer" [nzShowTitle]="_title" [nzSize]="_size" [nzLoading]="_loading">
@@ -42,7 +44,8 @@
       <td nz-td>{{data.userName}}</td>
       <td nz-td>{{data.userNameStatus}}</td>
       <td nz-td>{{data.createDate}}</td>
-      <td nz-td>{{data.dataDate}}</td>
+      <td nz-td>{{data.loginDate}}</td>
+      <!-- 传递accountId到userInfo路由 -->
       <td nz-td style="text-align:center;"><i [routerLink]="'/user-info/'+data.accountId" class="anticon anticon-login" style="cursor: pointer;color:cornflowerblue;"></i></td>
     </tr>
   </tbody>
