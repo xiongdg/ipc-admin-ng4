@@ -1,19 +1,21 @@
-<nz-table #nzTable [nzDataSource]="data" [nzIsPagination]="false" [nzScroll]="{ y: 240 }" [nzSize]="'small'" [nzBordered]="true">
-  <ng-template #nzFixedHeader>
-    <thead nz-thead>
-      <tr>
-        <th nz-th [nzWidth]="'150px'"><span>账号</span></th>
-        <th nz-th [nzWidth]="'150px'"><span>账号类型</span></th>
-        <th nz-th><span>Address</span></th>
-      </tr>
-    </thead>
-  </ng-template>
-  <span nz-table-title>asdasdaskdaskdjasl</span>
-  <tbody nz-tbody>
-    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-      <td nz-td>{{data.name}}</td>
-      <td nz-td>{{data.age}}</td>
-      <td nz-td>{{data.address}}</td>
-    </tr>
-  </tbody>
-</nz-table>
+<div class="bread-crumb">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item> <a href="">Home</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item> 新增用户 </nz-breadcrumb-item>
+  </nz-breadcrumb>
+</div>
+
+<div nz-row>
+  <h2 style="text-align:center;margin-top:20px;">新增用户</h2>
+  <div nz-col [nzSpan]="8" [nzOffset]="8">
+    <nz-input [(ngModel)]="addInfo.email" [nzPlaceHolder]="'邮箱'"></nz-input>
+    <nz-input [(ngModel)]="addInfo.mobile" [nzPlaceHolder]="'手机'"></nz-input>
+    <nz-input [(ngModel)]="addInfo.userName" [nzPlaceHolder]="'用户名'"></nz-input>
+    <nz-input [(ngModel)]="addInfo.password" [nzPlaceHolder]="'密码'"></nz-input>
+    <nz-select style="width:100%" nzAllowClear [nzPlaceHolder]="'选择账号状态'" [(ngModel)]="addInfo.userNameStatus" [nzShowSearch]="true">
+      <nz-option *ngFor="let option of Options" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+      </nz-option>
+    </nz-select>
+    <button style="width:100%" nz-button [nzType]="'primary'" (click)="add()">提交</button>
+  </div>
+</div>

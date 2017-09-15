@@ -1,7 +1,9 @@
+import { QueryData } from './queryData';
 import { StoreService } from './../../../service/store.service';
 import { HttpService } from './../../../service/http.service';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+
 @Component({
   selector: 'my-user-list',
   templateUrl: './user-list.component.html',
@@ -18,13 +20,14 @@ export class UserListComponent implements OnInit {
 
   _dataSet = [];        // 表格数据
   // 查询数据
+  // queryData = new QueryData();
   queryData = {
     query: '',
     userNameStatus: '',
     startTime: null,
     endTime: null,
-    startPage: null,
-    itemPerPage_userList: null
+    startPage: 1,
+    pageSize: 10
   };
   userNameStatuses = [
     { label: '激活', value: 'active' },
@@ -36,7 +39,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     // 从localstorage获取每页条数
-    this.queryData.itemPerPage_userList = this.storeService.getItem('itemPerPage_userList') || 10;
+    this.queryData.pageSize = Number(this.storeService.getItem('itemPerPage_userList')) || 10;
     this.getData();
   }
 
@@ -44,23 +47,35 @@ export class UserListComponent implements OnInit {
     this._loading = true;
     this.nextCanUse = true;
     if (val === 'itemChange') { // 如果是修改了每页条数，那么重新设置localstorage存的页码
-      this.storeService.setItem('itemPerPage_userList', this.queryData.itemPerPage_userList);
+      this.storeService.setItem('itemPerPage_userList', this.queryData.pageSize);
     }
     this.getData();
   }
 
   doSearch() {
-    console.log(this.queryData);
     this.getData();
   }
   getData() {
-    this.httpService.getData('/appPath/user/queryUserList.do', this.queryData) // 刷新数据
+    console.log(this.queryData);
+    // 保存一下开始时间和结束时间
+    let startTime = this.queryData.startTime;
+    let endTime = this.queryData.endTime;
+    if (this.queryData.startTime) {
+      this.queryData.startTime = this.queryData.startTime.getTime();
+    }
+    if (this.queryData.endTime) {
+      this.queryData.endTime = this.queryData.endTime.getTime();
+    }
+    this.httpService.getData('user/queryUserList.do', this.queryData) // 刷新数据
       .subscribe((data) => {
         this._loading = false;
-        if (data.data.users.length < Number(this.queryData.itemPerPage_userList)) {
+        if (data.data.users.length < Number(this.queryData.pageSize)) {
           this.nextCanUse = false;
         }
         this._dataSet = data.data.users;
+        // 将时间重新赋值给queryData.startTime
+        this.queryData.startTime = startTime;
+        this.queryData.endTime = endTime;
       });
   }
 

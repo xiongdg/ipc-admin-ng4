@@ -7,31 +7,7 @@
   </nz-breadcrumb>
 </div>
 
-<ng-template #title>
-  <span>修改状态</span>
-</ng-template>
-<ng-template #content>
-  <div>
-    <nz-radio-group [(ngModel)]="editStatus">
-      <label nz-radio [nzValue]="'active'">
-                <span>激活</span>
-              </label>
-      <label nz-radio [nzValue]="'inactive'">
-                <span>未激活</span>
-              </label>
-      <label nz-radio [nzValue]="'invalid'">
-                <span>失效</span>
-              </label>
-    </nz-radio-group>
-  </div>
-</ng-template>
-<ng-template #footer>
-  <div>
-    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
-          提 交
-        </button>
-  </div>
-</ng-template>
+
 <div class="sub-info" *ngIf="userInfo" nz-row [nzGutter]="32">
   <nz-table #nzTable nzDataSource="1" [nzIsPagination]="false" nz-col [nzSpan]="24" [nzSize]="'middle'" [nzBordered]="true"
     [nzShowTitle]="true">
@@ -48,10 +24,38 @@
         <td>{{ userInfo?.email }}asd</td>
         <td>状态</td>
         <td>
-          {{status}}
-          <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="showModalForTemplate(title, content, footer)" style="margin-left: 50px;">
+          <span style="display: inline-block; padding: 3px 10px;background:#59c359;border-radius: 3px;color: #fff;">
+            {{userInfo?.userNameStatus === 'active' ? '激活' : (userInfo?.userNameStatus === 'inactive' ? '未激活' : '失效')}}
+          </span>
+          <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="showModalForTemplate(title, content, footer)" style="float:right;">
               <span><i class="anticon anticon-edit"></i></span>
             </button>
+            <!-- modal框 -->
+          <ng-template #title>
+            <span>修改状态</span>
+          </ng-template>
+          <ng-template #content>
+            <div>
+              <nz-radio-group [(ngModel)]="editStatus">
+                <label nz-radio [nzValue]="'active'">
+                              <span>激活</span>
+                            </label>
+                <label nz-radio [nzValue]="'inactive'">
+                              <span>未激活</span>
+                            </label>
+                <label nz-radio [nzValue]="'invalid'">
+                              <span>失效</span>
+                            </label>
+              </nz-radio-group>
+            </div>
+          </ng-template>
+          <ng-template #footer>
+            <div>
+              <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                        提 交
+                      </button>
+            </div>
+          </ng-template>
         </td>
       </tr>
       <tr nz-tbody-tr>
@@ -63,8 +67,8 @@
     </tbody>
   </nz-table>
   <div class="users-login" nz-col [nzSpan]="8">
-    <nz-table style="margin-top:20px;" #nzTable1 [nzDataSource]="userInfo.usersLogin" [nzIsPagination]="false" [nzScroll]="{ y: 180 }"
-      [nzShowTitle]="true" [nzSize]="'small'" [nzBordered]="true">
+    <nz-table style="margin-top:20px;" #nzTable1 [nzDataSource]="2" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
+      [nzSize]="'small'" [nzBordered]="true">
       <span class="table-title" nz-table-title>绑定账号</span>
       <ng-template #nzFixedHeader>
         <thead nz-thead>
@@ -75,7 +79,7 @@
         </thead>
       </ng-template>
       <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let data of nzTable1?.data">
+        <tr nz-tbody-tr *ngFor="let data of userInfo.usersLogin">
           <td nz-td>{{data.loginName}}</td>
           <td nz-td>{{data.loginType}}</td>
         </tr>
@@ -84,8 +88,8 @@
   </div>
 
   <div class="user-devs" nz-col [nzSpan]="16">
-    <nz-table style="margin-top:20px;" #nzTable2 [nzDataSource]="userInfo.userDevs" [nzIsPagination]="false" [nzScroll]="{ y: 180 }"
-      [nzShowTitle]="true" [nzSize]="'small'" [nzBordered]="true">
+    <nz-table style="margin-top:20px;" #nzTable2 [nzDataSource]="3" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
+      [nzSize]="'small'" [nzBordered]="true">
       <span class="table-title" nz-table-title>设备列表</span>
       <ng-template #nzFixedHeader>
         <thead nz-thead>
@@ -97,7 +101,7 @@
         </thead>
       </ng-template>
       <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let data of nzTable2?.data">
+        <tr nz-tbody-tr *ngFor="let data of userInfo.userDevs">
           <td nz-td>{{data.role}}</td>
           <td nz-td>{{data.cid}}</td>
           <td nz-td>{{data.seriesNumber}}</td>

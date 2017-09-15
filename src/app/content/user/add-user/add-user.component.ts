@@ -1,3 +1,4 @@
+import { HttpService } from './../../../service/http.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,17 +7,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  data = [];
-  constructor() { }
+  addInfo = {
+    email: '',
+    mobile: '',
+    userName: '',
+    password: '',
+    userNameStatus: ''
+  };
+  Options = [
+    { value: 'active', label: '激活' },
+    { value: 'inactive', label: '未激活' },
+    { value: 'invalid', label: '失效' }
+  ];
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    for (let i = 0; i < 1; i++) {
-      this.data.push({
-        name   : `Edward King ${i}`,
-        age    : 32,
-        address: `London, Park Lane no. ${i}`,
+
+  }
+
+  add() {
+    this.httpService.getData('user/addUser.do', this.addInfo)
+      .subscribe(res => {
+        if (res.code === 200) {
+          console.log(res);
+        } else {
+
+        }
       });
-    }
   }
 
 }
