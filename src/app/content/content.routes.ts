@@ -25,7 +25,7 @@ export const contentRoutes = [
       { path: 'user-info/:id', component: UserInfoComponent },
       { path: 'add-user', component: AddUserComponent },
       { path: 'dev-list', component: DevListComponent },
-      { path: 'dev-info', component: DevInfoComponent },
+      { path: 'dev-info/:cid', component: DevInfoComponent },
       { path: 'dev-type-list', component: DevTypeListComponent },
       { path: 'dev-type-info', component: DevTypeInfoComponent },
       { path: 'add-dev', component: AddDevComponent },

@@ -130,6 +130,6 @@ export class UserListComponent implements OnInit {
         }
         return [];
       }
-    }
+    };
   }
 }

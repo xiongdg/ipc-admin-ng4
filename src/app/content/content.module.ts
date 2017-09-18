@@ -1,7 +1,6 @@
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { contentRoutes } from './content.routes';
@@ -28,6 +27,7 @@ import { PaginationModule } from './../module/pagination/pagination.module';
     RouterModule.forChild(contentRoutes),
     NgZorroAntdModule,
     FormsModule,
+    ReactiveFormsModule,
     PaginationModule
   ],
   declarations: [

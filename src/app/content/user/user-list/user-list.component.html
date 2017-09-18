@@ -53,5 +53,5 @@
 <div class="pagination">
   <!-- _pageChange由子组件点击按钮触发,触发父组件更新数据 -->
   <!-- refreshData获取新数据、nextCanUse设置下一页按钮是否可用、_currentPage当前页码、_itemPerPage每页条数 -->
-  <my-pagination (refreshData)="refreshData($event)" [nextCanUse]="nextCanUse" [(_currentPage)]="queryData.startPage" [(_itemPerPage)]="queryData.itemPerPage_userList"></my-pagination>
+  <my-pagination (refreshData)="refreshData($event)" [nextCanUse]="nextCanUse" [(_currentPage)]="queryData.startPage" [(_itemPerPage)]="queryData.pageSize"></my-pagination>
 </div>
