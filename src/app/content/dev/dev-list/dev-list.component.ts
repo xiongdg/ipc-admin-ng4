@@ -19,6 +19,8 @@ export class DevListComponent implements OnInit {
   _loading = false;     // 表格更新数据动画
 
   _dataSet = [];        // 表格数据
+  // 设备在线状态
+  onlineStatus: boolean;
   // 查询数据
   // queryData = new QueryData();
   queryDevData = {
@@ -51,11 +53,29 @@ export class DevListComponent implements OnInit {
     }
     this.getData();
   }
-
+  // 搜索
   doSearch() {
     this.getData();
   }
+  // 查询在线状态
+  getState(val, idx) {
+    this._dataSet[idx].devOnLive = '查询中..';
+    this.httpService.getData('dev/queryOnlineStatus.do', { cid: val })
+      .subscribe(res => {
+        this._dataSet[idx].devOnLive = res.data.onlineStatus;
+        console.log(res.data.onlineStatus);
+        if (res.data.onlineStatus === 0) {
+          this._dataSet[idx].devOnLive = '离线';
+        } else if (res.data.onlineStatus === 1) {
+          this._dataSet[idx].devOnLive = '在线';
+        } else {
+          this._dataSet[idx].devOnLive = '重试';
+        }
+      });
+  }
+
   getData() {
+    this._loading = true;
     console.log(this.queryDevData);
     // 保存一下开始时间和结束时间
     let startTime = this.queryDevData.startTime;

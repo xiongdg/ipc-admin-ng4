@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 
@@ -22,7 +21,7 @@ import { StoreService } from './service/store.service';
     HttpModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    RouterModule.forRoot(appRoutes, { useHash: true }),
+    RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [HttpService, StoreService],
   bootstrap: [AppComponent]

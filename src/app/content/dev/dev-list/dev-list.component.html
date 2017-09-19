@@ -14,13 +14,11 @@
   </nz-select>
 
   <span class="reg_time">注册时间:</span>
-  <nz-datepicker (ngModelChange)="queryDevData.startTime=$event;_startValueChange()" 
-  [ngModel]="queryDevData.startTime" [nzDisabledDate]="_disabledStartDate" [nzShowTime]="true" 
-  [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'"></nz-datepicker>
+  <nz-datepicker (ngModelChange)="queryDevData.startTime=$event;_startValueChange()" [ngModel]="queryDevData.startTime" [nzDisabledDate]="_disabledStartDate"
+    [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'"></nz-datepicker>
 
-  <nz-datepicker (ngModelChange)="queryDevData.endTime=$event;_endValueChange()" 
-  [ngModel]="queryDevData.endTime" [nzDisabledDate]="_disabledEndDate" [nzShowTime]="queryDevData.endTime" 
-  [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
+  <nz-datepicker (ngModelChange)="queryDevData.endTime=$event;_endValueChange()" [ngModel]="queryDevData.endTime" [nzDisabledDate]="_disabledEndDate"
+    [nzShowTime]="queryDevData.endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
   <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-search" (click)="doSearch()"></i></button>
   <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-plus" routerLink="/add-user"></i></button>
 </div>
@@ -41,7 +39,7 @@
     </tr>
   </thead>
   <tbody nz-tbody>
-    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+    <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i=index">
       <td nz-td>{{data.cid}}</td>
       <td nz-td>{{data?.devType?.typeName}}</td>
       <td nz-td>{{data?.devType?.devTypeId}}</td>
@@ -50,7 +48,11 @@
       <td nz-td>{{data?.regDate}}</td>
       <td nz-td>{{data?.mobile}}</td>
       <td nz-td>{{data?.email}}</td>
-      <td nz-td>{{data?.devOnLive || '点击查询'}}<button nz-button [nzType]="'primary'">查询</button></td>
+      <td nz-td>
+        <span class="isOnlive" (click)="getState(data.cid, i)" title="点击查询实时状态">
+        {{data?.devOnLive === undefined ? '点击查询' : data?.devOnLive }}
+      </span>
+      </td>
       <!-- 传递设备cid到DevInfo路由 -->
       <td nz-td style="text-align:center;"><i [routerLink]="'/dev-info/'+data.cid" class="anticon anticon-login" style="cursor: pointer;color:cornflowerblue;"></i></td>
     </tr>

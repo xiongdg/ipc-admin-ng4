@@ -7,10 +7,10 @@
 
 <div nz-row>
   <h2 style="text-align:center;margin-top:20px;">新增设备</h2>
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="add()" nz-col [nzSpan]="12" [nzOffset]="6">
+  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="add();validateForm.reset()" nz-col [nzSpan]="12" [nzOffset]="6">
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="6">
-        <label>设备型号Id</label>
+        <label nz-form-item-required>设备型号Id</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.devTypeId" nz-col [nzSpan]="18">
         <nz-input formControlName="devTypeId" [nzPlaceHolder]="'devTypeId'" [nzSize]="'default'"></nz-input>
@@ -19,7 +19,7 @@
     </div>
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="6">
-        <label>设备状态</label>
+        <label nz-form-item-required>设备状态</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.devStatus" nz-col [nzSpan]="18">
         <nz-input formControlName="devStatus" [nzPlaceHolder]="'devStatus'" [nzSize]="'default'"></nz-input>
@@ -28,7 +28,7 @@
     </div>
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="6">
-        <label>设备序列号</label>
+        <label nz-form-item-required>设备序列号</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.seriesNumber" nz-col [nzSpan]="18">
         <nz-input formControlName="seriesNumber" [nzPlaceHolder]="'seriesNumber'" [nzSize]="'default'"></nz-input>
@@ -37,7 +37,7 @@
     </div>
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="6">
-        <label>设备secret</label>
+        <label nz-form-item-required>设备secret</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.clientSecret" nz-col [nzSpan]="18">
         <nz-input formControlName="clientSecret" [nzPlaceHolder]="'clientSecret'" [nzSize]="'default'"></nz-input>
@@ -78,7 +78,7 @@
     </div>
     <div nz-form-item nz-row>
       <div nz-form-control nz-col [nzOffset]="6">
-        <button nz-button class="login-form-button" [disabled]="!validateForm.valid" [nzType]="'primary'" [nzSize]="'default'" style="width:100%">{{ btnText }}</button>
+        <button nz-button class="login-form-button" [disabled]="!validateForm.valid || !active" [nzType]="'primary'" [nzSize]="'default'" style="width:100%">{{ btnText }}</button>
       </div>
     </div>
   </form>

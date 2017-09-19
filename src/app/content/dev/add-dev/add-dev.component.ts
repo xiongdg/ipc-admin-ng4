@@ -11,6 +11,7 @@ export class AddDevComponent implements OnInit {
   validateForm: FormGroup;
   nOptions;
   btnText = '新增';
+  active = true;
   constructor(private fb: FormBuilder, private httpService: HttpService) { }
 
   ngOnInit() {
@@ -39,12 +40,14 @@ export class AddDevComponent implements OnInit {
   }
 
   add() {
+    this.active = false;  // 阻止连续点击
     console.log(this.validateForm.value);
     this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
     console.log(this.validateForm.value);
     this.btnText = '正在提交';
     this.httpService.getData('dev/addDev.do', this.validateForm.value)
       .subscribe(res => {
+        this.active = true;
         if (res.code === 200) {
           console.log(res);
           this.btnText = '提交';
