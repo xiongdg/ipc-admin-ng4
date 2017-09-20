@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -21,9 +21,10 @@ import { StoreService } from './service/store.service';
     HttpModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    RouterModule.forRoot(appRoutes, { useHash: true })
+    RouterModule.forRoot(appRoutes, { useHash: true }),
+    ReactiveFormsModule
   ],
-  providers: [HttpService, StoreService],
+  providers: [HttpService, StoreService],     // TODO
   bootstrap: [AppComponent]
 })
 export class AppModule { }

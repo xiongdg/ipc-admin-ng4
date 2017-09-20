@@ -1,3 +1,57 @@
-<p>
-  dev-type-list works!
-</p>
+<div class="bread-crumb">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item> Home </nz-breadcrumb-item>
+    <nz-breadcrumb-item> <a href="">Application Center</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item> <a href="">Application List</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item> 设备型号列表 </nz-breadcrumb-item>
+  </nz-breadcrumb>
+</div>
+
+<div style="margin-bottom:20px;">
+  <nz-input [(ngModel)]="queryDevTypeData.query" [nzPlaceHolder]="'邮箱/手机/昵称'" [nzSize]="'large'"></nz-input>
+
+  <span class="reg_time">注册时间:</span>
+  <nz-datepicker (ngModelChange)="queryDevTypeData.startTime=$event;_startValueChange()" [ngModel]="queryDevTypeData.startTime"
+    [nzDisabledDate]="_disabledStartDate" [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'"></nz-datepicker>
+
+  <nz-datepicker (ngModelChange)="queryDevTypeData.endTime=$event;_endValueChange()" [ngModel]="queryDevTypeData.endTime" [nzDisabledDate]="_disabledEndDate"
+    [nzShowTime]="queryDevTypeData.endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
+  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-search" (click)="doSearch()"></i></button>
+  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-plus" routerLink="/add-user"></i></button>
+</div>
+<nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzBordered]="_bordered" [nzLoading]="_loading" [nzIsPagination]="_pagination"
+  [nzShowFooter]="_footer" [nzShowTitle]="_title" [nzSize]="_size" [nzLoading]="_loading">
+  <thead nz-thead *ngIf="_header">
+    <tr>
+      <th nz-th><span>型号ID</span></th>
+      <th nz-th><span>设备型号</span></th>
+      <th nz-th><span>型号备注</span></th>
+      <th nz-th><span>最新固件版本</span></th>
+      <th nz-th><span>最新固件更新日期</span></th>
+      <th nz-th><span>型号备注</span></th>
+      <th nz-th><span>修改人</span></th>
+      <th nz-th><span>最后修改时间</span></th>
+      <th nz-th><span>操作</span></th>
+    </tr>
+  </thead>
+  <tbody nz-tbody>
+    <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i=index">
+      <td nz-td>{{data?.devTypeId}}</td>
+      <td nz-td>{{data?.typeName}}</td>
+      <td nz-td>{{data?.typeDesp}}</td>
+      <td nz-td>{{data?.devStatus}}</td>
+      <td nz-td>{{data?.lastRom?.lastRomVersion}}</td>
+      <td nz-td>{{data?.lastRom?.lastRomDate}}</td>
+      <td nz-td>{{data?.lastModify?.lastModifyAdmin}}</td>
+      <td nz-td>{{data?.lastModify?.lastModifyDate}}</td>
+      <!-- 传递设备cid到DevInfo路由 -->
+      <td nz-td style="text-align:center;"><i [routerLink]="'/dev-type-info/'+data.devTypeId" class="anticon anticon-login" style="cursor: pointer;color:cornflowerblue;"></i></td>
+    </tr>
+  </tbody>
+</nz-table>
+<div class="pagination">
+  <!-- _pageChange由子组件点击按钮触发,触发父组件更新数据 -->
+  <!-- refreshData获取新数据、nextCanUse设置下一页按钮是否可用、_currentPage当前页码、_itemPerPage每页条数 -->
+  <my-pagination (refreshData)="refreshData($event)" [nextCanUse]="nextCanUse" [(_currentPage)]="queryDevTypeData.startPage"
+    [(_itemPerPage)]="queryDevTypeData.pageSize"></my-pagination>
+</div>

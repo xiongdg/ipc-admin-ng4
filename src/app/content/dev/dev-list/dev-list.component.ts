@@ -89,8 +89,13 @@ export class DevListComponent implements OnInit {
     this.httpService.getData('dev/queryDevList.do', this.queryDevData) // 刷新数据
       .subscribe((data) => {
         this._loading = false;
+        if (data.data.devList === null) {
+          data.data.devList = [];
+        }
         if (data.data.devList.length < Number(this.queryDevData.pageSize)) {
           this.nextCanUse = false;
+        } else {
+          this.nextCanUse = true;
         }
         this._dataSet = data.data.devList;
         // 将时间重新赋值给queryDevData.startTime

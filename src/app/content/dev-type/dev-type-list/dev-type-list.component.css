@@ -1,0 +1,14 @@
+.components-table-demo-control-bar {
+  margin-bottom: 10px;
+}
+.components-table-demo-control-bar ::ng-deep .ant-form-item {
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.pagination{line-height: 50px;}
+
+nz-input,nz-select{width:15%;}
+nz-datepicker{width:20%;}
+.reg_time{padding: 0 5px 0 10px;}
+.do_search{padding: 0 15px !important;}

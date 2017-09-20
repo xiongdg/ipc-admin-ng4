@@ -53,6 +53,8 @@ export class UserListComponent implements OnInit {
   }
 
   doSearch() {
+    this._loading = true;
+    console.log('doSearch');
     this.getData();
   }
   getData() {
@@ -68,9 +70,17 @@ export class UserListComponent implements OnInit {
     }
     this.httpService.getData('user/queryUserList.do', this.queryData) // 刷新数据
       .subscribe((data) => {
+        console.log(data);
         this._loading = false;
+        if (data.data.devList === null) {
+          data.data.users = [];
+        }
+        console.log('aaa');
         if (data.data.users.length < Number(this.queryData.pageSize)) {
+          console.log('检测下一页');
           this.nextCanUse = false;
+        } else {
+          this.nextCanUse = true;
         }
         this._dataSet = data.data.users;
         // 将时间重新赋值给queryData.startTime

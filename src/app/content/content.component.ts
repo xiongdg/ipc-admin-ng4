@@ -12,6 +12,7 @@ export class ContentComponent implements OnInit {
   isOpenFour = false;
   isOpenFive = false;
   isOpenSix = false;
+  isCollapsed = false;
 
   openChange(value) {
     if (value === 'one') {
@@ -57,5 +58,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  // 退出登录
+  logOut() {
+  }
 }

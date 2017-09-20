@@ -18,7 +18,6 @@ import { AddDevTypeComponent } from './dev-type/add-dev-type/add-dev-type.compon
 import { AppListComponent } from './app/app-list/app-list.component';
 import { AddAppComponent } from './app/add-app/add-app.component';
 import { AppInfoComponent } from './app/app-info/app-info.component';
-
 import { PaginationModule } from './../module/pagination/pagination.module';
 
 @NgModule({

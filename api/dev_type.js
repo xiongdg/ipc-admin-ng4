@@ -125,7 +125,7 @@
 // request
 + {
     "dev_type_id": "@string",               // 设备型号id varchar(32)
-    "dev_roles": {                           // 角色(新增或修改)
+    "dev_roles": [{                         // 角色(新增或修改)
         "role": number,                     // 角色代码 int
         "role_desp": "@string",             // 角色描述
         "role_status": "invalid",           // 角色状态: varchar(16) (valid/invalid)
@@ -133,7 +133,8 @@
             ...
         },
     },
-    "modify_admin": "role"                   // 修改人
+    ...
+]
 }
 
 //response

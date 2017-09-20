@@ -27,7 +27,7 @@ export const contentRoutes = [
       { path: 'dev-list', component: DevListComponent },
       { path: 'dev-info/:cid', component: DevInfoComponent },
       { path: 'dev-type-list', component: DevTypeListComponent },
-      { path: 'dev-type-info', component: DevTypeInfoComponent },
+      { path: 'dev-type-info/:devTypeId', component: DevTypeInfoComponent },
       { path: 'add-dev', component: AddDevComponent },
       { path: 'add-dev-type', component: AddDevTypeComponent },
       { path: 'app-list', component: AppListComponent },
