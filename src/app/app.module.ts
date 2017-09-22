@@ -22,7 +22,7 @@ import { StoreService } from './service/store.service';
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
     RouterModule.forRoot(appRoutes
-      // , { useHash: true }
+      , { useHash: true }
     ),
     ReactiveFormsModule
   ],

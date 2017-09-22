@@ -15,7 +15,7 @@
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.appName" nz-col [nzSpan]="17">
         <nz-select formControlName="appName" [nzPlaceHolder]="'appName'" nzAllowClear>
-          <nz-option *ngFor="let option of devTypeListOptions" [nzLabel]="option.typeName" [nzValue]="option.appName" [nzDisabled]="option.disabled">
+          <nz-option *ngFor="let option of statusOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
           </nz-option>
         </nz-select>
         <div nz-form-explain *ngIf="validateForm.controls.appName.dirty&&validateForm.controls.appName.hasError('required')">Please input your appName!</div>
