@@ -1,7 +1,7 @@
 <div class="bread-crumb">
   <nz-breadcrumb>
     <nz-breadcrumb-item> Home </nz-breadcrumb-item>
-    <nz-breadcrumb-item> 设备：{{devTypeId}} </nz-breadcrumb-item>
+    <nz-breadcrumb-item> 设备型号：{{devTypeId}} </nz-breadcrumb-item>
   </nz-breadcrumb>
 </div>
 
@@ -58,10 +58,13 @@
       <tbody nz-tbody>
         <tr nz-tbody-tr *ngFor="let data of devTypeInfo?.devRoles; let i = index">
           <td nz-td>{{data.role}}</td>
+          <!-- 禁止修改 -->
           <td nz-td>{{data.roleDesp}}</td>
           <td nz-td>{{data.roleStatus}}</td>
-          <td nz-td>{{data.roleAbility}}</td>
-          <td nz-td style="text-align:center"><span (click)="edit(i)">edit</span>  </td>
+          <td nz-td>
+            <span *ngIf="!editRow">{{data.roleAbility}}{{editRow}}</span>
+          </td>
+          <td nz-td style="text-align:center"><span (click)="edit(i)">edit</span> </td>
         </tr>
       </tbody>
     </nz-table>
@@ -87,7 +90,7 @@
           <td nz-td>{{data.updateDesp}}</td>
           <td nz-td>{{data.date}}</td>
           <td nz-td>{{data.updateAddress}}</td>
-          <td nz-td style="text-align:center"><span (click)="edit(i)">edit</span>  </td>
+          <td nz-td style="text-align:center"><span (click)="edit(i)">edit</span> </td>
         </tr>
       </tbody>
     </nz-table>

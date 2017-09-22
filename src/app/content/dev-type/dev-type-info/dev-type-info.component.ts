@@ -13,6 +13,9 @@ import { NzModalService } from 'ng-zorro-antd';   // modal组件
 export class DevTypeInfoComponent implements OnInit {
   devTypeInfo: DevTypeInfo = new DevTypeInfo();  // 储存用户详情信息
   devTypeId: string;    // 接收路由参数
+  devRoles;             // 储存原始角色列表
+  roleListEditObj = {}; // 定义一个空对象来保存修改中的数据
+  roleEditIdx = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,12 +32,19 @@ export class DevTypeInfoComponent implements OnInit {
       })
       .subscribe((data) => {
         this.devTypeInfo = data.data;
-        console.log(data);
+        this.devRoles = this.devTypeInfo.devRoles;
+        // 给devRoles每一项都添加一个key来标识是否正在编辑该行
+        this.devRoles.map(item => {
+          item.editRow = false;
+        });
+        console.log(this.devRoles);
       });
   }
 
   edit(idx) {
     console.log('edit start ' + idx);
+    console.log(this.devTypeInfo.devRoles[idx]);
+    this.devTypeInfo.devRoles[idx].editRow = true;
   }
 
 }
