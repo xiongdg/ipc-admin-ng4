@@ -8,7 +8,7 @@
 </div>
 <div style="margin-bottom:20px;">
   <nz-input [(ngModel)]="queryDevData.query" [nzPlaceHolder]="'邮箱/手机/昵称'" [nzSize]="'large'"></nz-input>
-  <nz-select nzAllowClear [nzPlaceHolder]="'用户状态'" [(ngModel)]="queryDevData.devStatus" [nzShowSearch]="true">
+  <nz-select nzAllowClear [nzPlaceHolder]="'设备状态'" [(ngModel)]="queryDevData.devStatus" [nzShowSearch]="true">
     <nz-option *ngFor="let option of devStatuses" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
     </nz-option>
   </nz-select>
@@ -19,8 +19,8 @@
 
   <nz-datepicker (ngModelChange)="queryDevData.endTime=$event;_endValueChange()" [ngModel]="queryDevData.endTime" [nzDisabledDate]="_disabledEndDate"
     [nzShowTime]="queryDevData.endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
-  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-search" (click)="doSearch()"></i></button>
-  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-plus" routerLink="/add-user"></i></button>
+  <button class="do_search" nz-button [nzType]="'primary'" (click)="doSearch()"><i class="anticon anticon-search"></i></button>
+  <button class="do_search" nz-button [nzType]="'primary'" routerLink="/add-user"><i class="anticon anticon-plus"></i></button>
 </div>
 <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzBordered]="_bordered" [nzLoading]="_loading" [nzIsPagination]="_pagination"
   [nzShowFooter]="_footer" [nzShowTitle]="_title" [nzSize]="_size" [nzLoading]="_loading">
@@ -44,7 +44,7 @@
       <td nz-td>{{data?.devType?.typeName}}</td>
       <td nz-td>{{data?.devType?.devTypeId}}</td>
       <td nz-td>{{data?.devStatus}}</td>
-      <td nz-td>{{data?.currentVersion}}</td>
+      <td nz-td>{{data?.romType?.currentVersion}}</td>
       <td nz-td>{{data?.regDate}}</td>
       <td nz-td>{{data?.mobile}}</td>
       <td nz-td>{{data?.email}}</td>

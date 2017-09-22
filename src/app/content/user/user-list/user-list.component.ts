@@ -54,7 +54,8 @@ export class UserListComponent implements OnInit {
 
   doSearch() {
     this._loading = true;
-    console.log('doSearch');
+    this.queryData.startPage = 1;
+    this.nextCanUse = true;
     this.getData();
   }
   getData() {

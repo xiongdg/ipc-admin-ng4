@@ -20,7 +20,8 @@ export class AddDevComponent implements OnInit {
   devTypeListOptions;
   btnText = '新增';
   active = true;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private httpService: HttpService,
     private confirmServ: NzModalService
   ) { }
@@ -52,11 +53,6 @@ export class AddDevComponent implements OnInit {
       p2pID: [null, [Validators.required]],
       p2pSecret: [null, [Validators.required]]
     });
-    // 检测登录状态
-    this.httpService.getData('admin/checkLogin.do', '')
-      .subscribe(res => {
-        console.log(res);
-      });
   }
 
   add() {
@@ -78,7 +74,12 @@ export class AddDevComponent implements OnInit {
           });
           setTimeout(() => modal.destroy(), 1000);
         } else {
-
+          // 提交失败
+          const modal = this.confirmServ.warning({
+            // title: '',
+            content: '新增失败'
+          });
+          setTimeout(() => modal.destroy(), 1000);
         }
       });
   }

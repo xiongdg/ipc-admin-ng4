@@ -55,6 +55,9 @@ export class DevListComponent implements OnInit {
   }
   // 搜索
   doSearch() {
+    this._loading = true;
+    this.queryDevData.startPage = 1;
+    this.nextCanUse = true;
     this.getData();
   }
   // 查询在线状态

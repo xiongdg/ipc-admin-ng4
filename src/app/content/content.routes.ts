@@ -22,7 +22,7 @@ export const contentRoutes = [
       { path: '', redirectTo: 'user-list' },
       { path: 'lamp-status', component: LampStatusComponent },
       { path: 'user-list', component: UserListComponent },
-      { path: 'user-info/:id', component: UserInfoComponent },
+      { path: 'user-info/:accountId', component: UserInfoComponent },
       { path: 'add-user', component: AddUserComponent },
       { path: 'dev-list', component: DevListComponent },
       { path: 'dev-info/:cid', component: DevInfoComponent },
@@ -32,7 +32,7 @@ export const contentRoutes = [
       { path: 'add-dev-type', component: AddDevTypeComponent },
       { path: 'app-list', component: AppListComponent },
       { path: 'add-app', component: AddAppComponent },
-      { path: 'app-info', component: AppInfoComponent },
+      { path: 'app-info/:appId', component: AppInfoComponent },
     ]
   },
   {

@@ -25,7 +25,7 @@ export class DevTypeInfoComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         this.devTypeId = params.get('devTypeId');
-        return this.httpService.getData('devType/queryDevTypeInfo.do', { cid: this.devTypeId });
+        return this.httpService.getData('devType/queryDevTypeInfo.do', { devTypeId: this.devTypeId });
       })
       .subscribe((data) => {
         this.devTypeInfo = data.data;

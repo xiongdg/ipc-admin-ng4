@@ -6,7 +6,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit {
-  preCanUse = false;  // 初始化时上一页按钮不可用
   options = [           // 设置每页条数select数据
     { label: '10', value: '10' },
     { label: '20', value: '20' },
@@ -38,11 +37,6 @@ export class PaginationComponent implements OnInit {
   }
   pageChange(val) {
     this._currentPage = this._currentPage + val;
-    if (this._currentPage === 1) {
-      this.preCanUse = false;
-    } else {
-      this.preCanUse = true;
-    }
     this._currentPageChange.emit(this._currentPage);
     this.refreshData.emit('pageChange');
   }
@@ -50,7 +44,6 @@ export class PaginationComponent implements OnInit {
   itemChange() {
     this._currentPage = 1;  // 修改每页显示条数时将页码初始化为1.
     this._currentPageChange.emit(this._currentPage);  // 将页码传出去
-    this.preCanUse = false; // 禁用上一页按钮
     // this.nextCanUse = true; // 启用下一页
     this._itemPerPageChange.emit(this._itemPerPage);  // 把每页条数传上去
     this.refreshData.emit('itemChange');

@@ -21,7 +21,9 @@ import { StoreService } from './service/store.service';
     HttpModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    RouterModule.forRoot(appRoutes, { useHash: true }),
+    RouterModule.forRoot(appRoutes
+      // , { useHash: true }
+    ),
     ReactiveFormsModule
   ],
   providers: [HttpService, StoreService],     // TODO

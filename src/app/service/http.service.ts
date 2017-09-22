@@ -5,8 +5,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HttpService {
-  baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';
-  // baseUrl = 'http://192.168.1.101:81/kinzo-admin/';
+  // baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';
+  baseUrl = 'http://192.168.1.101:81/kinzo-admin/';
   constructor(public http: Http) { }
 
   getData1(url: string, data: any): Observable<any> {

@@ -26,8 +26,8 @@ export class UserInfoComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap
       .switchMap((params: ParamMap) => {
-        this.accountId = params.get('id');
-        return this.httpService.getData('user/queryUserInfo.do', { id: params.get('id') });
+        this.accountId = params.get('accountId');
+        return this.httpService.getData('user/queryUserInfo.do', { accountId: params.get('accountId') });
       })
       .subscribe((data) => {
         this.userInfo = data.data;

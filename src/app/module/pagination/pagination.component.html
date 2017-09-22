@@ -1,5 +1,5 @@
 <div class="my-pagination">
-  <button nz-button [nzType]="'default'" (click)="pageChange(-1)" [disabled]="!preCanUse"><i class=" anticon anticon-left"></i></button>
+  <button nz-button [nzType]="'default'" (click)="pageChange(-1)" [disabled]="_currentPage<2"><i class=" anticon anticon-left"></i></button>
   <span>&nbsp; {{_currentPage}}&nbsp; </span>
   <button nz-button [nzType]="'default'" (click)="pageChange(1)" [disabled]="!nextCanUse"><i class=" anticon anticon-right"></i></button>
   &nbsp;&nbsp;&nbsp;

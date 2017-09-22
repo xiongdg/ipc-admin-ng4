@@ -1,3 +1,68 @@
-<p>
-  app-info works!
-</p>
+<div class="bread-crumb">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item> Home </nz-breadcrumb-item>
+    <nz-breadcrumb-item> <a href="">Application Center</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item> <a href="">Application List</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item> app: {{appId}} </nz-breadcrumb-item>
+  </nz-breadcrumb>
+</div>
+
+<div class="sub-info" *ngIf="appInfo" nz-row [nzGutter]="32">
+  <nz-table #nzTable nzDataSource="1" [nzIsPagination]="false" nz-col [nzSpan]="24" [nzSize]="'middle'" [nzBordered]="true"
+    [nzShowTitle]="true">
+    <span class="table-title" nz-table-title>设备信息</span>
+    <tbody nz-tbody>
+      <tr nz-tbody-tr>
+        <td>appId</td>
+        <td>{{ appInfo?.app.appId }}</td>
+        <td>名称</td>
+        <td>{{ appInfo?.app.appName }}</td>
+      </tr>
+      <tr nz-tbody-tr>
+        <td>app描述</td>
+        <td>{{ appInfo?.app.appDesp }}</td>
+        <td>状态</td>
+        <td>{{ appInfo?.app.appStatus }}</td>
+      </tr>
+      <tr nz-tbody-tr>
+        <td>个推appId</td>
+        <td>{{ appInfo?.getui.getuiAppid }}</td>
+        <td>个推appKey</td>
+        <td>{{ appInfo?.getui.getuiAppkey }}</td>
+      </tr>
+      <tr nz-tbody-tr>
+        <td>个推状态</td>
+        <td>{{ appInfo?.getui.getuiStatus }}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <div class="users-login" nz-col [nzSpan]="24" style="margin-top:20px;">
+    <nz-table style="margin-top:20px;" #nzTable1 [nzDataSource]="2" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
+      [nzSize]="'small'" [nzBordered]="true">
+      <span class="table-title" nz-table-title>app版本列表</span>
+      <ng-template #nzFixedHeader>
+        <thead nz-thead>
+          <tr>
+            <th nz-th [nzWidth]="'150px'"><span>app版本</span></th>
+            <th nz-th [nzWidth]="'150px'"><span>版本描述</span></th>
+            <th nz-th [nzWidth]="'150px'"><span>升级地址</span></th>
+            <th nz-th [nzWidth]="'150px'"><span>大小</span></th>
+            <th nz-th [nzWidth]="'150px'"><span>发布日期</span></th>
+          </tr>
+        </thead>
+      </ng-template>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of appInfo?.appVersions">
+          <td nz-td>{{data.version}}</td>
+          <td nz-td>{{data.versionDesp}}</td>
+          <td nz-td>{{data.updateAddress}}</td>
+          <td nz-td>{{data.appSize}}</td>
+          <td nz-td>{{data.versionDate1 | date: 'yyyy-MM-dd'}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

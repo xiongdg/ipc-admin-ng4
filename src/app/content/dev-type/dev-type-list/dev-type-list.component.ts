@@ -46,6 +46,9 @@ export class DevTypeListComponent implements OnInit {
 
   // 搜索
   doSearch() {
+    this._loading = true;
+    this.queryDevTypeData.startPage = 1;
+    this.nextCanUse = true;
     this.getData();
   }
 
