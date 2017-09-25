@@ -14,10 +14,7 @@
         <label nz-form-item-required>app名称</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.appName" nz-col [nzSpan]="17">
-        <nz-select formControlName="appName" [nzPlaceHolder]="'appName'" nzAllowClear>
-          <nz-option *ngFor="let option of statusOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
-          </nz-option>
-        </nz-select>
+        <nz-input formControlName="appName" [nzPlaceHolder]="'appName'" [nzSize]="'default'"></nz-input>
         <div nz-form-explain *ngIf="validateForm.controls.appName.dirty&&validateForm.controls.appName.hasError('required')">Please input your appName!</div>
       </div>
     </div>

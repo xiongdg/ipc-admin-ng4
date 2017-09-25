@@ -15,7 +15,7 @@
   <nz-datepicker (ngModelChange)="queryDevTypeData.endTime=$event;_endValueChange()" [ngModel]="queryDevTypeData.endTime" [nzDisabledDate]="_disabledEndDate"
     [nzShowTime]="queryDevTypeData.endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
   <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-search" (click)="doSearch()"></i></button>
-  <button class="do_search" nz-button [nzType]="'primary'"><i class="anticon anticon-plus" routerLink="/add-user"></i></button>
+  <button class="do_search" nz-button [nzType]="'primary'" routerLink="/add-dev-type"><i class="anticon anticon-plus"></i></button>
 </div>
 <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzBordered]="_bordered" [nzLoading]="_loading" [nzIsPagination]="_pagination"
   [nzShowFooter]="_footer" [nzShowTitle]="_title" [nzSize]="_size" [nzLoading]="_loading">

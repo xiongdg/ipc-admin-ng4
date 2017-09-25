@@ -38,7 +38,7 @@ export class AddAppComponent implements OnInit {
   add() {
     this.isLoading = true;
     this.btnText = '正在提交';
-    this.httpService.getData('', this.validateForm.value)
+    this.httpService.getData('appType/updateAppType.do', this.validateForm.value)
       .subscribe(res => {
         if (res.code === 200) {
           this.btnText = '新增';
@@ -50,7 +50,7 @@ export class AddAppComponent implements OnInit {
         } else {
           // 提交失败
           const modal = this.confirmServ.warning({
-            content: '新增失败'
+            content: res.code
           });
           setTimeout(() => modal.destroy(), 1000);
         }

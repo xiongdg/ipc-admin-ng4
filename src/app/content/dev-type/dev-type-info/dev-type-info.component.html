@@ -26,24 +26,12 @@
         <td>最后修改时间</td>
         <td>{{ devTypeInfo?.lastModify?.lastModifyDate}}</td>
       </tr>
-      <!-- <tr nz-tbody-tr>
-        <td>备注</td>
-        <td [attr.colspan]="3">
-          <span *ngIf="!editRow" style="float:left; width:90%;">{{ devInfo.reMarks}}</span>
-          <span *ngIf="editRow" style="float:left; width:80%;">
-            <nz-input [(ngModel)]="editReMarks" nzType="textarea" nzAutosize nzPlaceHolder="Autosize height based on content lines"></nz-input>
-          </span>
-          <button *ngIf="!editRow" (click)="edit(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">edit</button>
-          <button *ngIf="editRow" (click)="cancel(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">取消</button>
-          <button *ngIf="editRow" (click)="ok(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">确认</button>
-        </td>
-      </tr> -->
     </tbody>
   </nz-table>
   <div class="users-login" nz-col [nzSpan]="24" style="margin-top:20px;">
     <nz-table style="margin-top:20px;" #nzTable1 [nzDataSource]="2" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
       [nzSize]="'large'" [nzBordered]="true">
-      <span class="table-title" nz-table-title>角色列表</span>
+      <span class="table-title" nz-table-title>角色列表<button (click)="addRole()" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:20px;">新增</button></span>
       <ng-template #nzFixedHeader>
         <thead nz-thead>
           <tr>
@@ -55,24 +43,46 @@
           </tr>
         </thead>
       </ng-template>
+
       <tbody nz-tbody>
         <tr nz-tbody-tr *ngFor="let data of devTypeInfo?.devRoles; let i = index">
           <td nz-td>{{data.role}}</td>
-          <!-- 禁止修改 -->
-          <td nz-td>{{data.roleDesp}}</td>
-          <td nz-td>{{data.roleStatus}}</td>
           <td nz-td>
-            <span *ngIf="!editRow">{{data.roleAbility}}{{editRow}}</span>
+            <span *ngIf="!data.editRow">{{data.roleDesp}}</span>
+            <span *ngIf="data.editRow">
+              <nz-input [(ngModel)]="roleListEditObj.roleDesp" nzType="textarea" nzAutosize></nz-input>
+            </span>
           </td>
-          <td nz-td style="text-align:center"><span (click)="edit(i)">edit</span> </td>
+          <td nz-td>
+            <span *ngIf="!data.editRow">{{data.roleStatus}}</span>
+            <span *ngIf="data.editRow">
+              <nz-input [(ngModel)]="roleListEditObj.roleStatus" nzType="textarea" nzAutosize></nz-input>
+            </span>
+          </td>
+          <td nz-td>
+            <span *ngIf="!data.editRow">{{data.roleAbility}}</span>
+            <span *ngIf="data.editRow">
+              <nz-input [(ngModel)]="roleListEditObj.roleAbility" nzType="textarea" nzAutosize></nz-input>
+            </span>
+          </td>
+          <td nz-td style="text-align:center">
+            <button *ngIf="!data.editRow" (click)="edit(i);data.editRow = !data.editRow;" nz-button [nzType]="'primary'" [nzSize]="'small'">edit</button>
+            <span *ngIf="data.editRow"> <a (click)="ok(i);data.editRow = !data.editRow;">save</a></span>
+            <span *ngIf="data.editRow">
+                <nz-popconfirm [nzTitle]="'确定返回?'" (nzOnConfirm)="data.editRow = !data.editRow;">
+                  <a nz-popconfirm>Cancel</a>
+                </nz-popconfirm>
+            </span>
+          </td>
         </tr>
       </tbody>
+
     </nz-table>
   </div>
   <div class="users-login" nz-col [nzSpan]="24" style="margin-top:20px;">
     <nz-table style="margin-top:20px;" #nzTable2 [nzDataSource]="3" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
       [nzSize]="'large'" [nzBordered]="true">
-      <span class="table-title" nz-table-title>固件版本列表</span>
+      <span class="table-title" nz-table-title>固件版本列表<button (click)="addRomVersion()" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:20px;">新增</button></span>
       <ng-template #nzFixedHeader>
         <thead nz-thead>
           <tr>
@@ -88,7 +98,7 @@
         <tr nz-tbody-tr *ngFor="let data of devTypeInfo?.romTypeList; let i = index">
           <td nz-td>{{data.version}}</td>
           <td nz-td>{{data.updateDesp}}</td>
-          <td nz-td>{{data.date}}</td>
+          <td nz-td>{{data.date | date: 'yyyy-MM-dd'}}</td>
           <td nz-td>{{data.updateAddress}}</td>
           <td nz-td style="text-align:center"><span (click)="edit(i)">edit</span> </td>
         </tr>

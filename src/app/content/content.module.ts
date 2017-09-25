@@ -19,6 +19,8 @@ import { AppListComponent } from './app/app-list/app-list.component';
 import { AddAppComponent } from './app/add-app/add-app.component';
 import { AppInfoComponent } from './app/app-info/app-info.component';
 import { PaginationModule } from './../module/pagination/pagination.module';
+import { AddRoleComponent } from './dev-type/dev-type-info/add-role/add-role.component';
+import { AddRomVerComponent } from './dev-type/dev-type-info/add-rom-ver/add-rom-ver.component';
 
 @NgModule({
   imports: [
@@ -44,6 +46,9 @@ import { PaginationModule } from './../module/pagination/pagination.module';
     AppListComponent,
     AddAppComponent,
     AppInfoComponent,
-  ]
+    AddRoleComponent,
+    AddRomVerComponent,
+  ],
+  entryComponents: [AddRoleComponent, AddRomVerComponent]
 })
 export class ContentModule { }

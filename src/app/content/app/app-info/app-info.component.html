@@ -36,7 +36,7 @@
       </tr>
     </tbody>
   </nz-table>
-
+  
   <div class="users-login" nz-col [nzSpan]="24" style="margin-top:20px;">
     <nz-table style="margin-top:20px;" #nzTable1 [nzDataSource]="2" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
       [nzSize]="'small'" [nzBordered]="true">
@@ -54,11 +54,11 @@
       </ng-template>
       <tbody nz-tbody>
         <tr nz-tbody-tr *ngFor="let data of appInfo?.appVersions">
-          <td nz-td>{{data.version}}</td>
-          <td nz-td>{{data.versionDesp}}</td>
-          <td nz-td>{{data.updateAddress}}</td>
-          <td nz-td>{{data.appSize}}</td>
-          <td nz-td>{{data.versionDate1 | date: 'yyyy-MM-dd'}}</td>
+          <td nz-td>{{data?.version}}</td>
+          <td nz-td>{{data?.versionDesp}}</td>
+          <td nz-td>{{data?.updateAddress}}</td>
+          <td nz-td>{{data?.appSize}}</td>
+          <td nz-td>{{data?.versionDate1 | date: 'yyyy-MM-dd'}}</td>
         </tr>
       </tbody>
     </nz-table>
