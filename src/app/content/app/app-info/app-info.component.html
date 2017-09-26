@@ -8,39 +8,83 @@
 <div class="sub-info" *ngIf="appInfo" nz-row [nzGutter]="32">
   <nz-table #nzTable nzDataSource="1" [nzIsPagination]="false" nz-col [nzSpan]="24" [nzSize]="'middle'" [nzBordered]="true"
     [nzShowTitle]="true">
-    <span class="table-title" nz-table-title>设备信息</span>
+    <span class="table-title" nz-table-title>app信息
+      <span style="float:right;margin-right:20px;">
+        <button *ngIf="!editing" (click)="editDevBaseInfo();editing = !editing;" nz-button [nzType]="'primary'" [nzSize]="'small'">edit</button>
+        <span *ngIf="editing"> <a (click)="okBaseInfo();editing = !editing;">save</a></span>
+    <span *ngIf="editing">
+          <nz-popconfirm [nzTitle]="'确定返回?'" (nzOnConfirm)="editing = !editing;">
+            <a nz-popconfirm>Cancel</a>
+          </nz-popconfirm>
+        </span>
+    </span>
+    </span>
     <tbody nz-tbody>
       <tr nz-tbody-tr>
         <td>appId</td>
-        <td>{{ appInfo?.app.appId }}</td>
+        <td>{{ appInfo.app.appId }}</td>
         <td>名称</td>
-        <td>{{ appInfo?.app.appName }}</td>
+        <td>
+          <span *ngIf="!editing">{{ appInfo.app.appName }}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="editAppBaseInfo.appName" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
       </tr>
       <tr nz-tbody-tr>
         <td>app描述</td>
-        <td>{{ appInfo?.app.appDesp }}</td>
+        <td>
+          <span *ngIf="!editing">{{ appInfo.app.appDesp }}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="editAppBaseInfo.appDesp" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
         <td>状态</td>
-        <td>{{ appInfo?.app.appStatus }}</td>
+        <td>
+          <span *ngIf="!editing">{{ appInfo.app.appStatus }}</span>
+          <span *ngIf="editing">
+            <nz-select style="width: 120px;" [(ngModel)]="editAppBaseInfo.appStatus" nzAllowClear style="width:100%;">
+                <nz-option *ngFor="let option of statusOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                </nz-option>
+              </nz-select>
+          </span>
+
+        </td>
       </tr>
       <tr nz-tbody-tr>
         <td>个推appId</td>
-        <td>{{ appInfo?.getui.getuiAppid }}</td>
+        <td>
+          <span *ngIf="!editing">{{ appInfo.getui.getuiAppid }}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="editAppBaseInfo.getuiAppid" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
         <td>个推appKey</td>
-        <td>{{ appInfo?.getui.getuiAppkey }}</td>
+        <td>
+          <span *ngIf="!editing">{{ appInfo.getui.getuiAppkey }}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="editAppBaseInfo.getuiAppkey" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
       </tr>
       <tr nz-tbody-tr>
         <td>个推状态</td>
-        <td>{{ appInfo?.getui.getuiStatus }}</td>
+        <td>
+          <span *ngIf="!editing">{{ appInfo.getui.getuiStatus }}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="editAppBaseInfo.getuiStatus" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
         <td></td>
         <td></td>
       </tr>
     </tbody>
   </nz-table>
-  
+
   <div class="users-login" nz-col [nzSpan]="24" style="margin-top:20px;">
     <nz-table style="margin-top:20px;" #nzTable1 [nzDataSource]="2" [nzIsPagination]="false" [nzScroll]="{ y: 180 }" [nzShowTitle]="true"
       [nzSize]="'small'" [nzBordered]="true">
-      <span class="table-title" nz-table-title>app版本列表</span>
+      <span class="table-title" nz-table-title>app版本列表<button (click)="addRole()" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:20px;">新增</button></span>
       <ng-template #nzFixedHeader>
         <thead nz-thead>
           <tr>
@@ -53,12 +97,12 @@
         </thead>
       </ng-template>
       <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let data of appInfo?.appVersions">
-          <td nz-td>{{data?.version}}</td>
-          <td nz-td>{{data?.versionDesp}}</td>
-          <td nz-td>{{data?.updateAddress}}</td>
-          <td nz-td>{{data?.appSize}}</td>
-          <td nz-td>{{data?.versionDate1 | date: 'yyyy-MM-dd'}}</td>
+        <tr nz-tbody-tr *ngFor="let data of appInfo.appVersions">
+          <td nz-td>{{data.version}}</td>
+          <td nz-td>{{data.versionDesp}}</td>
+          <td nz-td>{{data.updateAddress}}</td>
+          <td nz-td>{{data.appSize}}</td>
+          <td nz-td>{{data.versionDate1 | date: 'yyyy-MM-dd'}}</td>
         </tr>
       </tbody>
     </nz-table>

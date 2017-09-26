@@ -1,5 +1,5 @@
 import { AddRomVerComponent } from './add-rom-ver/add-rom-ver.component';
-import { DevTypeInfo, DevRole } from './devTypeInfo';
+import { DevTypeInfo, DevRole, BaseInfoObj } from './devTypeInfo';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './../../../service/http.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -17,7 +17,8 @@ export class DevTypeInfoComponent implements OnInit {
   devTypeInfo: DevTypeInfo = new DevTypeInfo();  // 储存用户详情信息
   devTypeId: string;    // 接收路由参数
   roleListEditObj = new DevRole(); // 定义一个空对象来保存修改中的数据
-  roleEditIdx = false;
+  baseInfoEditObj = new BaseInfoObj();         // 定义一个空对象来保存修改中的设备基本信息数据
+  baseInfoEdit = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,6 +39,25 @@ export class DevTypeInfoComponent implements OnInit {
         this.devTypeInfo.devRoles.map(item => {
           item.editRow = false;
         });
+      });
+  }
+  /*
+   修改基本信息
+   */
+  editDevBaseInfo() { // 将原值赋给修改值
+    console.log('edit');
+    this.baseInfoEditObj.devTypeId = this.devTypeId;
+    this.baseInfoEditObj.typeName = this.devTypeInfo.typeName;
+    this.baseInfoEditObj.typeDesp = this.devTypeInfo.typeDesp;
+  }
+  okBaseInfo(idx) {   // 提交修改
+    this.devTypeId = this.baseInfoEditObj.devTypeId;
+    this.devTypeInfo.typeName = this.baseInfoEditObj.typeName;
+    this.devTypeInfo.typeDesp = this.baseInfoEditObj.typeDesp;
+
+    this.httpService.getData('devType/updateDevType.do', this.baseInfoEditObj)
+      .subscribe(res => {
+        console.log(res.code);
       });
   }
   // 新增角色
@@ -83,6 +103,10 @@ export class DevTypeInfoComponent implements OnInit {
     //   console.log('result: ' + result);
     // });
   }
+
+  /*
+  * 修改角色能力
+   */
   edit(idx) { // 将原值赋给修改值
     console.log('edit');
     this.roleListEditObj = JSON.parse(JSON.stringify(this.devTypeInfo.devRoles[idx]));

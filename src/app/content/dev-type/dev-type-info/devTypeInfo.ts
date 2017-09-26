@@ -11,7 +11,7 @@ export class RomType {
 }
 export class DevTypeInfo {
   devTypeId: string;
-  typename: string;
+  typeName: string;
   devRoles: Array<DevRole>;
   devType: object;
   romType: object;
@@ -19,5 +19,12 @@ export class DevTypeInfo {
   lastModify: object;
   reMarks: string;
   romTypeList: Array<RomType>;
+  typeDesp: string;
+}
+
+export class BaseInfoObj {
+  devTypeId: string;
+  typeName: string;
+  typeDesp: string;
 }
 

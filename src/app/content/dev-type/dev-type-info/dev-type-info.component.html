@@ -8,17 +8,37 @@
 <div class="sub-info" *ngIf="devTypeInfo" nz-row [nzGutter]="32">
   <nz-table #nzTable nzDataSource="1" [nzIsPagination]="false" nz-col [nzSpan]="24" [nzSize]="'middle'" [nzBordered]="true"
     [nzShowTitle]="true">
-    <span class="table-title" nz-table-title>设备信息</span>
+    <span class="table-title" nz-table-title>设备信息
+      <span style="float:right;margin-right:20px;">
+        <button *ngIf="!editing" (click)="editDevBaseInfo();editing = !editing;" nz-button [nzType]="'primary'" [nzSize]="'small'">edit</button>
+        <span *ngIf="editing"> <a (click)="okBaseInfo();editing = !editing;">save</a></span>
+        <span *ngIf="editing">
+          <nz-popconfirm [nzTitle]="'确定返回?'" (nzOnConfirm)="editing = !editing;">
+            <a nz-popconfirm>Cancel</a>
+          </nz-popconfirm>
+        </span>
+    </span>
+    </span>
     <tbody nz-tbody>
       <tr nz-tbody-tr>
         <td>设备型号</td>
-        <td>{{ devTypeInfo?.typeName }}</td>
+        <td>
+          <span *ngIf="!editing">{{devTypeInfo?.typeName}}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="baseInfoEditObj.typeName" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
         <td>设备型号ID</td>
         <td>{{ devTypeInfo?.devTypeId }}</td>
       </tr>
       <tr nz-tbody-tr>
         <td>设备型号描述</td>
-        <td>{{ devTypeInfo?.typedesp }}</td>
+        <td>
+          <span *ngIf="!editing">{{devTypeInfo?.typeDesp}}</span>
+          <span *ngIf="editing">
+            <nz-input [(ngModel)]="baseInfoEditObj.typeDesp" nzType="textarea" nzAutosize></nz-input>
+          </span>
+        </td>
         <td>最后修改人</td>
         <td>{{ devTypeInfo?.lastModify?.lastModifyAdmin }}</td>
       </tr>
