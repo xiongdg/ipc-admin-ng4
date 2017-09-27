@@ -10,11 +10,11 @@
     [nzShowTitle]="true">
     <span class="table-title" nz-table-title>app信息
       <span style="float:right;margin-right:20px;">
-        <button *ngIf="!editing" (click)="editDevBaseInfo();editing = !editing;" nz-button [nzType]="'primary'" [nzSize]="'small'">edit</button>
-        <span *ngIf="editing"> <a (click)="okBaseInfo();editing = !editing;">save</a></span>
+        <button *ngIf="!editing" (click)="editDevBaseInfo();editing = !editing;" nz-button [nzType]="'primary'" [nzSize]="'small'">修改</button>
+        <span *ngIf="editing"> <a (click)="okBaseInfo();editing = !editing;">保存</a></span>
     <span *ngIf="editing">
           <nz-popconfirm [nzTitle]="'确定返回?'" (nzOnConfirm)="editing = !editing;">
-            <a nz-popconfirm>Cancel</a>
+            <a nz-popconfirm>返回</a>
           </nz-popconfirm>
         </span>
     </span>
@@ -41,7 +41,15 @@
         </td>
         <td>状态</td>
         <td>
-          <span *ngIf="!editing">{{ appInfo.app.appStatus }}</span>
+          <span *ngIf="!editing && appInfo.app.appStatus === 'active'">
+            激活
+          </span>
+          <span *ngIf="!editing && appInfo.app.appStatus === 'inactive'">
+            未激活
+          </span>
+          <span *ngIf="!editing && appInfo.app.appStatus === 'invalid'">
+            失效
+          </span>
           <span *ngIf="editing">
             <nz-select style="width: 120px;" [(ngModel)]="editAppBaseInfo.appStatus" nzAllowClear style="width:100%;">
                 <nz-option *ngFor="let option of statusOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
@@ -70,9 +78,21 @@
       <tr nz-tbody-tr>
         <td>个推状态</td>
         <td>
-          <span *ngIf="!editing">{{ appInfo.getui.getuiStatus }}</span>
+          
+            <span *ngIf="!editing && appInfo.getui.getuiStatus === 'active'">
+                激活
+              </span>
+          <span *ngIf="!editing && appInfo.getui.getuiStatus === 'inactive'">
+                未激活
+              </span>
+          <span *ngIf="!editing && appInfo.getui.getuiStatus === 'invalid'">
+                失效
+              </span>
           <span *ngIf="editing">
-            <nz-input [(ngModel)]="editAppBaseInfo.getuiStatus" nzType="textarea" nzAutosize></nz-input>
+            <nz-select style="width: 120px;" [(ngModel)]="editAppBaseInfo.getuiStatus" nzAllowClear style="width:100%;">
+                <nz-option *ngFor="let option of statusOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                </nz-option>
+              </nz-select>
           </span>
         </td>
         <td></td>

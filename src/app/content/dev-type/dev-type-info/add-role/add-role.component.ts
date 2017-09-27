@@ -2,7 +2,7 @@ import { HttpService } from './../../../../service/http.service';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, Input } from '@angular/core';
 import { NzModalSubject, NzModalService } from 'ng-zorro-antd';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -23,6 +23,15 @@ export class AddRoleComponent implements OnInit {
     this.subject.destroy('onCancel'); // 触发父组件onCancel
   }
 
+
+  jsonValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) { // 如果值为空
+      return { required: true };
+    } else if (!this.isJSON(control.value)) {  // 如果格式错误
+      return { error: true, isJson: true };
+    }
+  }
+
   constructor(
     private fb: FormBuilder,
     private subject: NzModalSubject,
@@ -35,16 +44,14 @@ export class AddRoleComponent implements OnInit {
   ngOnInit() {
     this.validateForm = this.fb.group({
       role: [null, [Validators.required]],
-      jsonCapability: [null, [Validators.required]],
+      jsonCapability: [null, [this.jsonValidator]],
     });
   }
 
   add() {
-    console.log('add');
     this.active = false;  // 阻止连续点击
     // 组装数据，加入devTypeId
     this.validateForm.value.devTypeId = this._devTypeId;
-    console.log(this.validateForm.value);
     this.btnText = '正在提交';
     this.httpService.getData('devType/editDevTypeRoleCapability.do', this.validateForm.value)
       .subscribe(res => {
@@ -68,5 +75,16 @@ export class AddRoleComponent implements OnInit {
           setTimeout(() => modal.destroy(), 1000);
         }
       });
+  }
+
+  isJSON(str) {
+    if (typeof str === 'string') {
+      try {
+        JSON.parse(str);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
   }
 }

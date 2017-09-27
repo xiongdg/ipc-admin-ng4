@@ -1,23 +1,50 @@
+import { AccesstokenService } from './../../service/accesstoken.service';
 import { HttpService } from './../../service/http.service';
+import { StoreService } from './../../service/store.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
+  // tslint: disable-next-line: component-selector;
   selector: 'my-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  username;
-  password;
-  constructor(private httpService: HttpService) { }
+  public btnText = '登录';
+  validateForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpService,
+    private router: Router,
+    private storeService: StoreService,
+    private accesstokenService: AccesstokenService
+  ) { }
 
   ngOnInit() {
+    // 表单数据
+    this.validateForm = this.fb.group({
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+    });
   }
-  login() {
-    this.httpService.getData('admin/login.do', { username: this.username, password: this.password })
-      .subscribe(res => {
-        console.log(res);
+  // 提交表单
+  _submitForm() {
+    this.btnText = '正在登录...';
+    this.httpService.getData('admin/login.do', this.validateForm.value)
+      .subscribe(data => {
+        if (data.code === 200) {
+          // 将登录标识设置为true、路由跳转至内容页
+          console.log('登录成功');
+          this.accesstokenService.accessToken = true;
+          this.router.navigate(['user-list']);
+        } else {
+          this.btnText = '登录';
+          alert(data.errorMessage);
+        }
       });
   }
 }

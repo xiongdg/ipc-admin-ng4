@@ -10,11 +10,11 @@
     [nzShowTitle]="true">
     <span class="table-title" nz-table-title>设备信息
       <span style="float:right;margin-right:20px;">
-        <button *ngIf="!editing" (click)="editDevBaseInfo();editing = !editing;" nz-button [nzType]="'primary'" [nzSize]="'small'">edit</button>
-        <span *ngIf="editing"> <a (click)="okBaseInfo();editing = !editing;">save</a></span>
-        <span *ngIf="editing">
+        <button *ngIf="!editing" (click)="editDevBaseInfo();editing = !editing;" nz-button [nzType]="'primary'" [nzSize]="'small'">修改</button>
+        <span *ngIf="editing"> <a (click)="okBaseInfo();editing = !editing;">保存</a></span>
+    <span *ngIf="editing">
           <nz-popconfirm [nzTitle]="'确定返回?'" (nzOnConfirm)="editing = !editing;">
-            <a nz-popconfirm>Cancel</a>
+            <a nz-popconfirm>取消</a>
           </nz-popconfirm>
         </span>
     </span>
@@ -23,10 +23,11 @@
       <tr nz-tbody-tr>
         <td>设备型号</td>
         <td>
-          <span *ngIf="!editing">{{devTypeInfo?.typeName}}</span>
+          {{devTypeInfo?.typeName}}
+          <!-- <span *ngIf="!editing">{{devTypeInfo?.typeName}}</span>
           <span *ngIf="editing">
             <nz-input [(ngModel)]="baseInfoEditObj.typeName" nzType="textarea" nzAutosize></nz-input>
-          </span>
+          </span> -->
         </td>
         <td>设备型号ID</td>
         <td>{{ devTypeInfo?.devTypeId }}</td>
@@ -44,7 +45,7 @@
       </tr>
       <tr nz-tbody-tr>
         <td>最后修改时间</td>
-        <td>{{ devTypeInfo?.lastModify?.lastModifyDate}}</td>
+        <td>{{ devTypeInfo?.lastModify?.lastModifyDate | date: "yyyy-MM-dd"}}</td>
       </tr>
     </tbody>
   </nz-table>
@@ -86,11 +87,11 @@
             </span>
           </td>
           <td nz-td style="text-align:center">
-            <button *ngIf="!data.editRow" (click)="edit(i);data.editRow = !data.editRow;" nz-button [nzType]="'primary'" [nzSize]="'small'">edit</button>
-            <span *ngIf="data.editRow"> <a (click)="ok(i);data.editRow = !data.editRow;">save</a></span>
+            <button *ngIf="!data.editRow" (click)="edit(i);data.editRow = !data.editRow;" nz-button [nzType]="'primary'" [nzSize]="'small'">修改</button>
+            <span *ngIf="data.editRow"> <a (click)="ok(i);data.editRow = !data.editRow;">保存</a></span>
             <span *ngIf="data.editRow">
                 <nz-popconfirm [nzTitle]="'确定返回?'" (nzOnConfirm)="data.editRow = !data.editRow;">
-                  <a nz-popconfirm>Cancel</a>
+                  <a nz-popconfirm>取消</a>
                 </nz-popconfirm>
             </span>
           </td>

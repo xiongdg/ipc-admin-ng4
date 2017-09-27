@@ -19,7 +19,7 @@
       </tr>
       <tr nz-tbody-tr>
         <td>邮箱</td>
-        <td>{{ userInfo?.email }}asd</td>
+        <td>{{ userInfo?.email }}</td>
         <td>状态</td>
         <td>
           <span style="display: inline-block; padding: 3px 10px;background:#59c359;border-radius: 3px;color: #fff;">
@@ -58,9 +58,9 @@
       </tr>
       <tr nz-tbody-tr>
         <td>注册时间</td>
-        <td>{{ userInfo?.createDate }}</td>
+        <td>{{ userInfo?.createDate | date: "yyyy-MM-dd" }}</td>
         <td>最后登录时间</td>
-        <td>{{ userInfo?.loginDate }}</td>
+        <td>{{ userInfo?.loginDate | date: "yyyy-MM-dd" }}</td>
       </tr>
     </tbody>
   </nz-table>

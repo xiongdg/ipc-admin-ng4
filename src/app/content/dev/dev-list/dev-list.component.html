@@ -5,7 +5,7 @@
   </nz-breadcrumb>
 </div>
 <div style="margin-bottom:20px;">
-  <nz-input [(ngModel)]="queryDevData.query" [nzPlaceHolder]="'邮箱/手机/昵称'" [nzSize]="'large'"></nz-input>
+  <nz-input [(ngModel)]="queryDevData.query" [nzPlaceHolder]="'ID/类型ID/名称/序列号/P2PID/固件版本/手机/邮箱'" [nzSize]="'large'" title="ID/类型ID/名称/序列号/P2PID/固件版本/手机/邮箱"></nz-input>
   <nz-select nzAllowClear [nzPlaceHolder]="'设备状态'" [(ngModel)]="queryDevData.devStatus" [nzShowSearch]="true">
     <nz-option *ngFor="let option of devStatuses" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
     </nz-option>
@@ -18,7 +18,7 @@
   <nz-datepicker (ngModelChange)="queryDevData.endTime=$event;_endValueChange()" [ngModel]="queryDevData.endTime" [nzDisabledDate]="_disabledEndDate"
     [nzShowTime]="queryDevData.endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'"></nz-datepicker>
   <button class="do_search" nz-button [nzType]="'primary'" (click)="doSearch()"><i class="anticon anticon-search"></i></button>
-  <button class="do_search" nz-button [nzType]="'primary'" routerLink="/add-user"><i class="anticon anticon-plus"></i></button>
+  <button class="do_search" nz-button [nzType]="'primary'" routerLink="/add-dev"><i class="anticon anticon-plus"></i></button>
 </div>
 <nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" [nzBordered]="_bordered" [nzLoading]="_loading" [nzIsPagination]="_pagination"
   [nzShowFooter]="_footer" [nzShowTitle]="_title" [nzSize]="_size" [nzLoading]="_loading">

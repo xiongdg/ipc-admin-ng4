@@ -23,7 +23,7 @@
         <td>{{ devInfo?.devType?.devTypeId }}</td>
       </tr>
       <tr nz-tbody-tr>
-        <td>当前固件版本{{devInfo?.romType?.currentVersion === devInfo?.romType?.newestVersion}}</td>
+        <td>当前固件版本</td>
         <td>{{ devInfo?.romType?.currentVersion }} <button style="float:right;margin-right:10px;" nz-button [nzType]="'primary'"
             [nzSize]="'small'" (click)="update(cid)" [disabled]="devInfo?.romType?.currentVersion === devInfo?.romType?.newestVersion"
             [nzLoading]="updating">{{btnText}}</button></td>
@@ -57,7 +57,7 @@
             <!-- <nz-input [(ngModel)]="editReMarks"></nz-input> -->
             <nz-input [(ngModel)]="editReMarks" nzType="textarea" nzAutosize nzPlaceHolder="Autosize height based on content lines"></nz-input>
           </span>
-          <button *ngIf="!editRow" (click)="edit(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">edit</button>
+          <button disabled="true" *ngIf="!editRow" (click)="edit(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">edit</button>
           <button *ngIf="editRow" (click)="cancel(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">取消</button>
           <button *ngIf="editRow" (click)="ok(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">确认</button>
         </td>
