@@ -27,13 +27,11 @@ export class AddDevTypeComponent implements OnInit {
 
   add() {
     this.active = false;  // 阻止连续点击
-    console.log(this.validateForm.value);
     this.btnText = '正在提交';
     this.httpService.getData('devType/addDevType.do', this.validateForm.value)
       .subscribe(res => {
         this.active = true;
         if (res.code === 200) {
-          console.log(res);
           this.btnText = '提交';
           // 提交成功
           const modal = this.confirmServ.success({

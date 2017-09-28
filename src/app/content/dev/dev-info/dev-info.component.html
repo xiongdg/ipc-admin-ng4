@@ -1,6 +1,7 @@
 <div class="bread-crumb">
   <nz-breadcrumb>
     <nz-breadcrumb-item> Home </nz-breadcrumb-item>
+    <nz-breadcrumb-item> <a routerLink="/dev-list">设备列表</a> </nz-breadcrumb-item>
     <nz-breadcrumb-item> 设备：{{cid}} </nz-breadcrumb-item>
   </nz-breadcrumb>
 </div>
@@ -14,7 +15,7 @@
         <td>设备标识</td>
         <td>{{ devInfo?.cid }}</td>
         <td>设备序列号</td>
-        <td>{{ devInfo?.mobile }}</td>
+        <td>{{ devInfo?.seriesNumber }}</td>
       </tr>
       <tr nz-tbody-tr>
         <td>设备型号</td>
@@ -34,7 +35,44 @@
         <td>出厂日期</td>
         <td>{{ devInfo?.regDate }}</td>
         <td>设备状态</td>
-        <td>{{ devInfo?.devStatus }}</td>
+        <td>
+          <span *ngIf="devInfo.devStatus === 'active'">激活</span>
+          <span *ngIf="devInfo.devStatus === 'inactive'">未激活</span>
+          <span *ngIf="devInfo.devStatus === 'invalid'">失效</span>
+          <span *ngIf="devInfo.devStatus === 'unallocated'">未分配</span>
+          <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="showModalForTemplate(title, content, footer)" style="float:right;">
+              <span><i class="anticon anticon-edit"></i></span>
+            </button>
+          <!-- modal框 -->
+          <ng-template #title>
+            <span>修改状态</span>
+          </ng-template>
+          <ng-template #content>
+            <div>
+              <nz-radio-group [(ngModel)]="editStatus">
+                <label nz-radio [nzValue]="'active'">
+                              <span>激活</span>
+                            </label>
+                <label nz-radio [nzValue]="'inactive'">
+                              <span>未激活</span>
+                            </label>
+                <label nz-radio [nzValue]="'invalid'">
+                              <span>失效</span>
+                            </label>
+                <label nz-radio [nzValue]="'unallocated'">
+                                <span>未分配</span>
+                              </label>
+              </nz-radio-group>
+            </div>
+          </ng-template>
+          <ng-template #footer>
+            <div>
+              <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                        提 交
+                      </button>
+            </div>
+          </ng-template>
+        </td>
       </tr>
       <tr nz-tbody-tr>
         <td>设备在线状态</td>
@@ -57,7 +95,8 @@
             <!-- <nz-input [(ngModel)]="editReMarks"></nz-input> -->
             <nz-input [(ngModel)]="editReMarks" nzType="textarea" nzAutosize nzPlaceHolder="Autosize height based on content lines"></nz-input>
           </span>
-          <button disabled="true" *ngIf="!editRow" (click)="edit(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">edit</button>
+          <button disabled="true" *ngIf="!editRow" (click)="edit(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'"
+            style="float:right;margin-right:10px;" title="暂未开通">修改</button>
           <button *ngIf="editRow" (click)="cancel(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">取消</button>
           <button *ngIf="editRow" (click)="ok(); editRow = !editRow" nz-button [nzType]="'primary'" [nzSize]="'small'" style="float:right;margin-right:10px;">确认</button>
         </td>

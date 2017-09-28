@@ -9,7 +9,12 @@ export class StoreService {
   constructor() { }
   // 获取item值
   getItem(name) {
-    return localStorage.getItem(name) || 10;
+    if (name !== 'accessToken') {
+      return localStorage.getItem(name) || 10;
+    }
+    if (name === 'accessToken') {
+      return localStorage.getItem(name) || '0';
+    }
   }
 
   // 设置item值

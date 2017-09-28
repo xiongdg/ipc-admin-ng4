@@ -1,3 +1,4 @@
+import { AuthGardGuard } from './../gard/auth-gard.guard';
 import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content.component';
 import { LampStatusComponent } from './lamp-status/lamp-status.component';
@@ -18,6 +19,7 @@ export const contentRoutes = [
   {
     path: '',
     component: ContentComponent,
+    canActivateChild: [AuthGardGuard],
     children: [
       { path: '', redirectTo: 'user-list' },
       { path: 'lamp-status', component: LampStatusComponent },

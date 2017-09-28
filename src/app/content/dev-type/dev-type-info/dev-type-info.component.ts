@@ -45,7 +45,6 @@ export class DevTypeInfoComponent implements OnInit {
    修改基本信息
    */
   editDevBaseInfo() { // 将原值赋给修改值
-    console.log('edit');
     this.baseInfoEditObj.devTypeId = this.devTypeId;
     this.baseInfoEditObj.typeName = this.devTypeInfo.typeName;
     this.baseInfoEditObj.typeDesp = this.devTypeInfo.typeDesp;
@@ -57,7 +56,6 @@ export class DevTypeInfoComponent implements OnInit {
 
     this.httpService.getData('devType/updateDevType.do', this.baseInfoEditObj)
       .subscribe(res => {
-        console.log(res.code);
       });
   }
   // 新增角色
@@ -71,7 +69,6 @@ export class DevTypeInfoComponent implements OnInit {
         that.refresh('devType/queryDevTypeInfo.do');
       },
       onCancel() {
-        console.log('父组件cancel');
       },
       footer: false,
       componentParams: {
@@ -91,7 +88,6 @@ export class DevTypeInfoComponent implements OnInit {
         that.refresh('devType/queryDevTypeInfo.do');
       },
       onCancel() {
-        console.log('父组件cancel');
       },
       footer: false,
       componentParams: {
@@ -99,16 +95,12 @@ export class DevTypeInfoComponent implements OnInit {
         addType: 'romVersion'
       }
     });
-    // subscription.subscribe(result => {
-    //   console.log('result: ' + result);
-    // });
   }
 
   /*
   * 修改角色能力
    */
   edit(idx) { // 将原值赋给修改值
-    console.log('edit');
     this.roleListEditObj = JSON.parse(JSON.stringify(this.devTypeInfo.devRoles[idx]));
   }
 

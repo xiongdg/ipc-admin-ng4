@@ -42,11 +42,9 @@ export class AddVersionComponent implements OnInit {
   }
 
   add() {
-    console.log('add');
     this.active = false;  // 阻止连续点击
     // 组装数据，加入appId
     this.validateForm.value.appId = this._appId;
-    console.log(this.validateForm.value);
     this.btnText = '正在提交';
     this.httpService.getData('appType/appUpgrade.do', this.validateForm.value)
       .subscribe(res => {

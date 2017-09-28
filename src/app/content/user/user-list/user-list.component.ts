@@ -59,10 +59,9 @@ export class UserListComponent implements OnInit {
     this.getData();
   }
   getData() {
-    console.log(this.queryData);
     // 保存一下开始时间和结束时间
-    let startTime = this.queryData.startTime;
-    let endTime = this.queryData.endTime;
+    const startTime = this.queryData.startTime;
+    const endTime = this.queryData.endTime;
     if (this.queryData.startTime) {
       this.queryData.startTime = this.queryData.startTime.getTime();
     }
@@ -71,14 +70,11 @@ export class UserListComponent implements OnInit {
     }
     this.httpService.getData('user/queryUserList.do', this.queryData) // 刷新数据
       .subscribe((data) => {
-        console.log(data);
         this._loading = false;
         if (data.data.devList === null) {
           data.data.users = [];
         }
-        console.log('aaa');
         if (data.data.users.length < Number(this.queryData.pageSize)) {
-          console.log('检测下一页');
           this.nextCanUse = false;
         } else {
           this.nextCanUse = true;

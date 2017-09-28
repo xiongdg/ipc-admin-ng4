@@ -33,19 +33,16 @@ export class AppInfoComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         this.appId = params.get('appId');
-        console.log(this.appId);
         return this.httpService.getData('appType/queryAppTypeInfo.do', { appId: params.get('appId') });
       })
       .subscribe((data) => {
         this.appInfo = data.data;
-        console.log(data);
       });
   }
   /*
      修改基本信息
      */
   editDevBaseInfo() { // 将原值赋给修改值
-    console.log('edit');
     this.editAppBaseInfo.appId = this.appId;
     this.editAppBaseInfo.appName = this.appInfo.app.appName;
     this.editAppBaseInfo.appDesp = this.appInfo.app.appDesp;
@@ -64,7 +61,6 @@ export class AppInfoComponent implements OnInit {
 
     this.httpService.getData('devType/updateDevType.do', this.editAppBaseInfo)
       .subscribe(res => {
-        console.log(res.code);
       });
   }
   // 新增版本
@@ -78,7 +74,6 @@ export class AppInfoComponent implements OnInit {
         that.refresh('appType/queryAppTypeInfo.do');
       },
       onCancel() {
-        console.log('父组件cancel');
       },
       footer: false,
       componentParams: {

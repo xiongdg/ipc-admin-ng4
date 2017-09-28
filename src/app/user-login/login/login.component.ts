@@ -1,4 +1,3 @@
-import { AccesstokenService } from './../../service/accesstoken.service';
 import { HttpService } from './../../service/http.service';
 import { StoreService } from './../../service/store.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit {
     private httpService: HttpService,
     private router: Router,
     private storeService: StoreService,
-    private accesstokenService: AccesstokenService
   ) { }
 
   ngOnInit() {
@@ -38,8 +36,7 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         if (data.code === 200) {
           // 将登录标识设置为true、路由跳转至内容页
-          console.log('登录成功');
-          this.accesstokenService.accessToken = true;
+          this.storeService.setItem('accessToken', 1);
           this.router.navigate(['user-list']);
         } else {
           this.btnText = '登录';

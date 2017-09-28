@@ -6,7 +6,7 @@
 </div>
 
 <div style="margin-bottom:20px;">
-  <nz-input [(ngModel)]="queryDevTypeData.query" [nzPlaceHolder]="'邮箱/手机/昵称'" [nzSize]="'large'"></nz-input>
+  <nz-input [(ngModel)]="queryDevTypeData.query" [nzPlaceHolder]="'设备类型id/设备类型名称/设备类型描述/固件版本号'" title="设备类型id/设备类型名称/设备类型描述/固件版本号" [nzSize]="'large'"></nz-input>
 
   <span class="reg_time">注册时间:</span>
   <nz-datepicker (ngModelChange)="queryDevTypeData.startTime=$event;_startValueChange()" [ngModel]="queryDevTypeData.startTime"
@@ -39,7 +39,7 @@
       <td nz-td>{{data?.typeDesp}}</td>
       <td nz-td>{{data?.devStatus}}</td>
       <td nz-td>{{data?.lastRom?.lastRomVersion}}</td>
-      <td nz-td>{{data?.lastRom?.lastRomDate}}</td>
+      <td nz-td>{{data?.lastRom?.lastRomDate | date: "yyyy-MM-dd"}}</td>
       <td nz-td>{{data?.lastModify?.lastModifyAdmin}}</td>
       <td nz-td>{{data?.lastModify?.lastModifyDate}}</td>
       <!-- 传递设备cid到DevInfo路由 -->

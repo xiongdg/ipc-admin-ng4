@@ -34,7 +34,8 @@ export class DevListComponent implements OnInit {
   devStatuses = [
     { label: '激活', value: 'active' },
     { label: '未激活', value: 'inactive' },
-    { label: '失效', value: 'invalid' }
+    { label: '失效', value: 'invalid' },
+    {label: '未分配', value: 'unallocated'}
   ];
   nextCanUse = true;          // 配合my-pagination组件，是否有下一页
   constructor(private httpService: HttpService, private storeService: StoreService) { }
@@ -66,7 +67,6 @@ export class DevListComponent implements OnInit {
     this.httpService.getData('dev/queryOnlineStatus.do', { cid: val })
       .subscribe(res => {
         this._dataSet[idx].devOnLive = res.data.onlineStatus;
-        console.log(res.data.onlineStatus);
         if (res.data.onlineStatus === 0) {
           this._dataSet[idx].devOnLive = '离线';
         } else if (res.data.onlineStatus === 1) {
@@ -79,10 +79,9 @@ export class DevListComponent implements OnInit {
 
   getData() {
     this._loading = true;
-    console.log(this.queryDevData);
     // 保存一下开始时间和结束时间
-    let startTime = this.queryDevData.startTime;
-    let endTime = this.queryDevData.endTime;
+    const startTime = this.queryDevData.startTime;
+    const endTime = this.queryDevData.endTime;
     if (this.queryDevData.startTime) {
       this.queryDevData.startTime = this.queryDevData.startTime.getTime();
     }

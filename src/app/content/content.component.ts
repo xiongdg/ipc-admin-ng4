@@ -1,4 +1,4 @@
-import { AccesstokenService } from './../service/accesstoken.service';
+import { StoreService } from './../service/store.service';
 import { HttpService } from './../service/http.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -59,7 +59,7 @@ export class ContentComponent implements OnInit {
   }
   constructor(
     private httpService: HttpService,
-    private accesstokenService: AccesstokenService,
+    private storeService: StoreService,
     private router: Router
   ) { }
 
@@ -70,10 +70,8 @@ export class ContentComponent implements OnInit {
     this.httpService.getData('admin/logout.do', '')
       .subscribe(res => {
         // 将登录标识设置为false、跳转至登录页
-        console.log('登录成功');
-        this.accesstokenService.accessToken = false;
+        this.storeService.setItem('accessToken', 0);
         this.router.navigate(['user/login']);
-        console.log(res);
       });
   }
 }

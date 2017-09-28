@@ -45,11 +45,8 @@ export class UserInfoComponent implements OnInit {
       maskClosable: false,
       onOk() {  // 成功关闭model的回调函数
         that.userInfo.userNameStatus = that.editStatus;  // 将修改状态赋值给状态
-        console.log(that.userInfo);
-        console.log(that.userInfo.userNameStatus);
       },
       onCancel() {  // 返回model的回调函数
-        console.log('click cancel');
         that.editStatus = that.userInfo.userNameStatus;
       }
     });
@@ -58,7 +55,6 @@ export class UserInfoComponent implements OnInit {
     this.isConfirmLoading = true;
     this.httpService.getData('user/updateStatus.do', { accountId: this.accountId, userNameStatus: this.editStatus })
       .subscribe(res => { // 修改成功，获取操作date
-        console.log(res);
         if (res.code === 200) {
           this.currentModal.destroy('onOk');  // 触发回调
           this.isConfirmLoading = false;      // 关闭动画

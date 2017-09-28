@@ -54,10 +54,9 @@ export class DevTypeListComponent implements OnInit {
 
   getData() {
     this._loading = true;
-    console.log(this.queryDevTypeData);
     // 保存一下开始时间和结束时间
-    let startTime = this.queryDevTypeData.startTime;
-    let endTime = this.queryDevTypeData.endTime;
+    const startTime = this.queryDevTypeData.startTime;
+    const endTime = this.queryDevTypeData.endTime;
     if (this.queryDevTypeData.startTime) {
       this.queryDevTypeData.startTime = this.queryDevTypeData.startTime.getTime();
     }

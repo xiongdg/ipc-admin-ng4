@@ -18,6 +18,9 @@ export class DevInfoComponent implements OnInit {
   updating = false;
   editRow = false;
   editReMarks;
+  editStatus: string;   // 修改过程中的status，以作撤销状态修改
+  currentModal;
+  isConfirmLoading = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -34,7 +37,6 @@ export class DevInfoComponent implements OnInit {
       })
       .subscribe((data) => {
         this.devInfo = data.data;
-        console.log(data);
       });
     // 根据cid获取设备在线状态
     this.getDevOnlineStatus(this.cid);
@@ -53,18 +55,15 @@ export class DevInfoComponent implements OnInit {
   }
   //
   edit() {
-    console.log('edit');
     this.editReMarks = this.devInfo.reMarks;
   }
   // 提交
   ok() {
-    console.log('ok');
     this.devInfo.reMarks = this.editReMarks;
   }
 
   // 返回
   cancel() {
-    console.log('cancel');
   }
   // 查询设备在线状态方法
   getDevOnlineStatus(cid) {
@@ -78,7 +77,40 @@ export class DevInfoComponent implements OnInit {
         } else {
           this.devOnLiveStatus = '重试';
         }
-        console.log(data);
+      });
+  }
+
+  // 修改激活状态
+  showModalForTemplate(titleTpl, contentTpl, footerTpl) {
+    this.editStatus = this.devInfo.devStatus;          // 将状态赋值给修改状态
+    const that = this;  // 存一下this，在onOk回调中使用
+    this.currentModal = this.modalService.open({
+      title: titleTpl,
+      content: contentTpl,
+      footer: footerTpl,
+      maskClosable: false,
+      onOk() {  // 成功关闭model的回调函数
+        that.devInfo.devStatus = that.editStatus;  // 将修改状态赋值给状态
+      },
+      onCancel() {  // 返回model的回调函数
+        that.editStatus = that.devInfo.devStatus;
+      }
+    });
+  }
+  handleOk(e) {
+    this.isConfirmLoading = true;
+    this.httpService.getData('dev/editDevStatus.do', { cid: this.cid, devStatus: this.editStatus })
+      .subscribe(res => { // 修改成功，获取操作date
+        if (res.code === 200) {
+          this.currentModal.destroy('onOk');  // 触发回调
+          this.isConfirmLoading = false;      // 关闭动画
+          this.currentModal = null;           // 清除modal
+        } else {
+          alert(res.errorMessage);
+          this.currentModal.destroy('onCancel');  // 关闭
+          this.isConfirmLoading = false;
+          this.currentModal = null;
+        }
       });
   }
 }

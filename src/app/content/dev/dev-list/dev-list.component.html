@@ -41,9 +41,14 @@
       <td nz-td>{{data.cid}}</td>
       <td nz-td>{{data?.devType?.typeName}}</td>
       <td nz-td>{{data?.devType?.devTypeId}}</td>
-      <td nz-td>{{data?.devStatus}}</td>
+      <td nz-td>
+        <span *ngIf="data.devStatus === 'unallocated'">未分配</span>
+        <span *ngIf="data.devStatus === 'active'">激活</span>
+        <span *ngIf="data.devStatus === 'inactive'">未激活</span>
+        <span *ngIf="data.devStatus === 'invalid'">失效</span>
+      </td>
       <td nz-td>{{data?.romType?.currentVersion}}</td>
-      <td nz-td>{{data?.regDate}}</td>
+      <td nz-td>{{data?.regDate | date:"yyyy-MM-dd"}}</td>
       <td nz-td>{{data?.mobile}}</td>
       <td nz-td>{{data?.email}}</td>
       <td nz-td>

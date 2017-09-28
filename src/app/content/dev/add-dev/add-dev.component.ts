@@ -12,7 +12,7 @@ export class AddDevComponent implements OnInit {
   validateForm: FormGroup;
   p2pProOptions;
   devStatusOptions = [
-    { label: '激活', value: 'unallocated' },
+    { label: '激活', value: 'active' },
     { label: '未激活', value: 'inactive' },
     { label: '未分配', value: 'unallocated' },
     { label: '失效', value: 'invalid' }
@@ -32,7 +32,6 @@ export class AddDevComponent implements OnInit {
       .subscribe(res => {
         if (res.code === 200) {
           this.p2pProOptions = res.data.p2pProvider;
-          console.log(this.p2pProOptions);
         }
       });
     // 请求设备类型列表
@@ -57,15 +56,12 @@ export class AddDevComponent implements OnInit {
 
   add() {
     this.active = false;  // 阻止连续点击
-    console.log(this.validateForm.value);
     this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
-    console.log(this.validateForm.value);
     this.btnText = '正在提交';
     this.httpService.getData('dev/addDev.do', this.validateForm.value)
       .subscribe(res => {
         this.active = true;
         if (res.code === 200) {
-          console.log(res);
           this.btnText = '提交';
           // 提交成功
           const modal = this.confirmServ.success({

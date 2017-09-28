@@ -1,16 +1,17 @@
-import { AccesstokenService } from './../service/accesstoken.service';
+import { StoreService } from './../service/store.service';
 import { Injectable } from '@angular/core';
 import {
   CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router,
+  CanActivateChild,
   // NavigationEnd, NavigationExtras, CanLoad,
   Route
 } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
-export class AuthGardGuard implements CanActivate {
+export class AuthGardGuard implements CanActivate, CanActivateChild {
 
   constructor(
-    private accesstokenService: AccesstokenService,
+    private storeService: StoreService,
     private router: Router
   ) { }
 
@@ -20,13 +21,16 @@ export class AuthGardGuard implements CanActivate {
     return this.checkLogin(url);
   }
 
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(route, state);
+  }
+
   checkLogin(url: string) {
-    console.log('garud');
-    if (url === '/user/login' && this.accesstokenService.accessToken) {   // 对于登录页，如果已登录则阻止
+    if (url === '/user/login' && this.storeService.getItem('accessToken') === '1') {   // 对于登录页，如果已登录则阻止
       this.router.navigate(['user-list']);    // 重定向至首页
       return false;
     }
-    if (url !== '/user/login' && !this.accesstokenService.accessToken) {   // 对于非登录页，如果未登录则阻止
+    if (url !== '/user/login' && this.storeService.getItem('accessToken') === '0') {   // 对于非登录页，如果未登录则阻止
       this.router.navigate(['user/login']);    // 重定向至登录页
       return false;
     }

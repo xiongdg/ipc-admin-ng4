@@ -40,11 +40,9 @@ export class AddRomVerComponent implements OnInit {
   }
 
   add() {
-    console.log('add');
     this.active = false;  // 阻止连续点击
     // 组装数据，加入devTypeId
     this.validateForm.value.devTypeId = this._devTypeId;
-    console.log(this.validateForm.value);
     this.btnText = '正在提交';
     this.httpService.getData('devUpdate/updateFirmware.do', this.validateForm.value)
       .subscribe(res => {

@@ -39,12 +39,8 @@ export class AddUserComponent implements OnInit {
       password: [null, [Validators.required]],
       userNameStatus: [null],
     });
-    // setInterval(() => {
-    //   console.log(this.validateForm.controls.userName);
-    // }, 5000);
   }
   con() {
-    console.log(this.validateForm);
   }
   add() {
     this.isLoading = true;

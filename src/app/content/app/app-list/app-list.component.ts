@@ -31,7 +31,6 @@ export class AppListComponent implements OnInit {
     this.httpService.getData('appType/queryAppTypeList.do', '')
       .subscribe(res => {
         this._loading = false;
-        console.log(res.data);
         this._dataSet = res.data.apps;
       });
   }

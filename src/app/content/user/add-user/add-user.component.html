@@ -1,6 +1,7 @@
 <div class="bread-crumb">
   <nz-breadcrumb>
     <nz-breadcrumb-item> <a href="">Home</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item> <a routerLink="/user-list">用户列表</a> </nz-breadcrumb-item>
     <nz-breadcrumb-item> 新增用户 </nz-breadcrumb-item>
   </nz-breadcrumb>
 </div>
@@ -36,7 +37,7 @@
         <label nz-form-item-required>用户密码</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.password" nz-col [nzSpan]="17">
-        <nz-input formControlName="password" [nzPlaceHolder]="'password'" [nzSize]="'default'"></nz-input>
+        <nz-input formControlName="password" [nzPlaceHolder]="'长度必须在10-20之间,可由字母数字下划线组成'" [nzSize]="'default'"></nz-input>
         <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">用户密码为必填项!</div>
       </div>
     </div>
