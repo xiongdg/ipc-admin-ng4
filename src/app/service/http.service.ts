@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
-  baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';
-  // baseUrl = 'http://192.168.1.101:81/kinzo-admin/';
-  // baseUrl = 'http://192.168.2.92:8080/kinzo-admin/';
-  // baseUrl = '/kinzo-admin/';
+  // baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';  // mock数据路径
+  // baseUrl = 'http://192.168.1.101/kinzo-admin/';  // 开发路径(shiyuan)
+  // baseUrl = 'http://192.168.2.92:8080/kinzo-admin/'; // 开发路径（yibo）
+  baseUrl = '/kinzo-admin/'; // 部署路径
   constructor(public http: Http, private router: Router, private storeService: StoreService) { }
 
   getData(url: string, data: any): Observable<any> {
@@ -19,10 +19,10 @@ export class HttpService {
       .get(this.baseUrl + url, {
         // withCredentials: true,  // 跨域传递cookie必须设置
         params: data,
-        // headers: new Headers({
-        //   'x-kz-dm': 'mc',
-        //   'Access-Control-Allow-Headers': 'x-kz-dm,Access-Control-Allow-Headers'
-        // })
+        headers: new Headers({
+          'x-kz-dm': 'mc'
+          // 'Access-Control-Allow-Headers': 'x-kz-dm,Access-Control-Allow-Headers'
+        })
       })
       .map((res: Response) => {
         if (res.json().code === 500) {  // 如果有错误
@@ -35,4 +35,25 @@ export class HttpService {
         return res.json();
       });
   }
+
+  postData(): Observable<any> {
+    return this.http.post(this.baseUrl, {}, {
+      headers: new Headers({
+        'x-api': 'xxx',
+        'Access-Control-Allow-Headers': 'x-api,Access-Control-Allow-Headers'
+      })
+    })
+      .map((res: Response) => {
+        if (res.json().code === 500) {  // 如果有错误
+          if (res.json().errorCode === 2002) { // 未登录
+            // 将登录标识设置为false、路由跳转至登录页
+            this.storeService.setItem('accessToken', 0);
+            this.router.navigate(['user/login']);
+          }
+        }
+        return res.json();
+      })
+  }
 }
+
+

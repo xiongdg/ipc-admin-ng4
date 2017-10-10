@@ -71,6 +71,9 @@ export class UserListComponent implements OnInit {
     this.httpService.getData('user/queryUserList.do', this.queryData) // 刷新数据
       .subscribe((data) => {
         this._loading = false;
+        if (!data.data) {
+          return;
+        }
         if (data.data.devList === null) {
           data.data.users = [];
         }
