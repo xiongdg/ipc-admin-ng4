@@ -31,10 +31,10 @@ export class AuthGardGuard implements CanActivate, CanActivateChild {
       return false;
     }
     // 在路灯系统中，关闭未登录检测。避免显示登录页。做自动登录
-    if (url !== '/user/login' && this.storeService.getItem('accessToken') === '0') {   // 对于非登录页，如果未登录则阻止
-      this.router.navigate(['user/login']);    // 重定向至登录页
-      return false;
-    }
+    // if (url !== '/user/login' && this.storeService.getItem('accessToken') === '0') {   // 对于非登录页，如果未登录则阻止
+    //   this.router.navigate(['user/login']);    // 重定向至登录页
+    //   return false;
+    // }
     return true;
   }
 }
