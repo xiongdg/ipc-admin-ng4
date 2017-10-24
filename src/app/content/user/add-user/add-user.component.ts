@@ -40,11 +40,6 @@ export class AddUserComponent implements OnInit {
       userNameStatus: [null],
     });
 }
-hei(){
-  console.log(this.validateForm.controls.userName)
-}
-con() {
-}
 add() {
   this.isLoading = true;
   this.btnText = '正在提交';

@@ -19,8 +19,7 @@
         <label nz-form-item-required>用户昵称</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.userName" nz-col [nzSpan]="17">
-        <nz-input formControlName="userName" [nzPlaceHolder]="'以字母或下划线开头，长度5-20'" [nzSize]="'default'" (blur)="con()"></nz-input>
-        <button (click)="hei()" type="button">click</button>
+        <nz-input formControlName="userName" [nzPlaceHolder]="'以字母或下划线开头，长度5-20'" [nzSize]="'default'"></nz-input>
         <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&(!!validateForm.controls.userName.errors&&!!validateForm.controls.userName.errors.minlength)">用户昵长度要求5-20!</div>
         <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">用户昵称为必填项!</div>
         <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&(!!validateForm.controls.userName.errors&&!!validateForm.controls.userName.errors.maxlength)">用户昵长度要求5-20!</div>
