@@ -46,11 +46,18 @@ export class HttpService {
     })
       .map((res: Response) => {
         if (res.json().code === 500) {  // 如果有错误
-          if (res.json().errorCode === 2002) { // 未登录
-            // 将登录标识设置为false、路由跳转至登录页
-            this.storeService.setItem('accessToken', 0);
-            this.router.navigate(['user/login']);
+          switch (res.json().errorCode) {
+            case 2002:          // 未登录
+              this.storeService.setItem('accessToken', 0);
+              this.router.navigate(['user/login']);
+              break;
+              // case 2000: 
           }
+          // if (res.json().errorCode === 2002) { // 未登录
+          //   // 将登录标识设置为false、路由跳转至登录页
+          //   this.storeService.setItem('accessToken', 0);
+          //   this.router.navigate(['user/login']);
+          // }
         }
         return res.json();
       });

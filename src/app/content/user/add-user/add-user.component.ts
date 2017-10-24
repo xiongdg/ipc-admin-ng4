@@ -33,36 +33,39 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
     this.validateForm = this.fb.group({
       // appId: [null, [Validators.required]],    // 新增app不需要传appId
-      email: [null],
+      email: [null, [Validators.email]],
       mobile: [null],
-      userName: [null, [Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
-      password: [null, [Validators.required]],
+      userName: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+      password: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]],
       userNameStatus: [null],
     });
-  }
-  con() {
-  }
-  add() {
-    this.isLoading = true;
-    this.btnText = '正在提交';
-    this.httpService.getData('user/addUser.do', this.validateForm.value)
-      .subscribe(res => {
-        if (res.code === 200) {
-          this.btnText = '新增';
-          // 提交成功
-          const modal = this.confirmServ.success({
-            content: '新建完成'
-          });
-          setTimeout(() => modal.destroy(), 1000);
-        } else {
-          // 提交失败
-          this.isLoading = false;
-          this.btnText = '新增';
-          const modal = this.confirmServ.warning({
-            content: res.errorMessage
-          });
-          // setTimeout(() => modal.destroy(), 1000);
-        }
-      });
-  }
+}
+hei(){
+  console.log(this.validateForm.controls.userName)
+}
+con() {
+}
+add() {
+  this.isLoading = true;
+  this.btnText = '正在提交';
+  this.httpService.getData('user/addUser.do', this.validateForm.value)
+    .subscribe(res => {
+      if (res.code === 200) {
+        this.btnText = '新增';
+        // 提交成功
+        const modal = this.confirmServ.success({
+          content: '新建完成'
+        });
+        setTimeout(() => modal.destroy(), 1000);
+      } else {
+        // 提交失败
+        this.isLoading = false;
+        this.btnText = '新增';
+        const modal = this.confirmServ.warning({
+          content: res.errorMessage
+        });
+        // setTimeout(() => modal.destroy(), 1000);
+      }
+    });
+}
 }

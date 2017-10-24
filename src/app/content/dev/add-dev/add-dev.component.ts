@@ -43,11 +43,12 @@ export class AddDevComponent implements OnInit {
       });
 
     this.validateForm = this.fb.group({
+      cid: [null],
       devTypeId: [null, [Validators.required]],
       devStatus: [null, [Validators.required]],
       seriesNumber: [null, [Validators.required]],
       clientSecret: [null, [Validators.required]],
-      _regDate: [null, [Validators.required]],
+      _regDate: [null],
       initStreamPk: [null, [Validators.required]],
       p2pID: [null, [Validators.required]],
       p2pSecret: [null, [Validators.required]]

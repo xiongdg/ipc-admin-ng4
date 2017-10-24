@@ -1,7 +1,11 @@
 <div class="bread-crumb">
   <nz-breadcrumb>
-    <nz-breadcrumb-item> <a href="">Home</a> </nz-breadcrumb-item>
-    <nz-breadcrumb-item> <a routerLink="/user-list">用户列表</a> </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a href="">Home</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a routerLink="/user-list">用户列表</a>
+    </nz-breadcrumb-item>
     <nz-breadcrumb-item> 新增用户 </nz-breadcrumb-item>
   </nz-breadcrumb>
 </div>
@@ -16,20 +20,10 @@
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.userName" nz-col [nzSpan]="17">
         <nz-input formControlName="userName" [nzPlaceHolder]="'以字母或下划线开头，长度5-20'" [nzSize]="'default'" (blur)="con()"></nz-input>
-        <!-- <div *ngIf="validateForm.controls.userName.invalid && (validateForm.controls.userName.dirty || validateForm.controls.userName.touched)" class="alert alert-danger">
-          <div *ngIf="validateForm.controls.userName.errors.required">
-            validateForm.controls.userName is required.
-          </div>
-          <div *ngIf="validateForm.controls.userName.errors.minlength">
-            validateForm.controls.userName must be at least 4 characters long.
-          </div>
-          <div *ngIf="validateForm.controls.userName.errors.maxLength">
-            validateForm.controls.userName cannot be Bob.
-          </div>
-        </div> -->
+        <button (click)="hei()" type="button">click</button>
+        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&(!!validateForm.controls.userName.errors&&!!validateForm.controls.userName.errors.minlength)">用户昵长度要求5-20!</div>
         <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">用户昵称为必填项!</div>
-        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('minLength')">用户昵长度要求5-20!</div>
-        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('maxLength')">用户昵长度要求5-20!</div>
+        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&(!!validateForm.controls.userName.errors&&!!validateForm.controls.userName.errors.maxlength)">用户昵长度要求5-20!</div>
       </div>
     </div>
     <div nz-form-item nz-row>
@@ -38,7 +32,9 @@
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.password" nz-col [nzSpan]="17">
         <nz-input formControlName="password" [nzPlaceHolder]="'长度必须在10-20之间,可由字母数字下划线组成'" [nzSize]="'default'"></nz-input>
+        <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&(!!validateForm.controls.password.errors&&!!validateForm.controls.password.errors.minlength)">密码长度要求10-20!</div>
         <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">用户密码为必填项!</div>
+        <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&(!!validateForm.controls.password.errors&&!!validateForm.controls.password.errors.maxlength)">用户昵长度要求5-20!</div>
       </div>
     </div>
 
