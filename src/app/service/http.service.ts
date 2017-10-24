@@ -11,6 +11,7 @@ export class HttpService {
   // baseUrl = 'http://192.168.1.101/kinzo-admin/';  // 开发路径(shiyuan)
   // baseUrl = 'http://192.168.2.92:8080/kinzo-admin/'; // 开发路径（yibo）
   // baseUrl = '/kinzo-admin/'; // 部署路径
+  // baseUrl = '/kinzo-admin-test/'; // 部署路径
   constructor(public http: Http, private router: Router, private storeService: StoreService) { }
 
   getData(url: string, data: any): Observable<any> {

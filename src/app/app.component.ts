@@ -20,9 +20,9 @@ export class AppComponent {
 
   }
 
-  ngOnInit() {
-    // 自动登录
-    this.httpService.getData('admin/login.do', {userName: 'admin', password: 'admin'})
+  ngOnInit() {console.log('ngOninit')
+    // 自动登录,用于路灯系统
+    this.httpService.getData('admin/login.do', {username: 'admin', password: 'admin'})
     .subscribe(data => {
       console.log(1);
       if (data.code === 200) {

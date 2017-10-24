@@ -70,6 +70,7 @@ export class UserListComponent implements OnInit {
     }
     this.httpService.getData('user/queryUserList.do', this.queryData) // 刷新数据
       .subscribe((data) => {
+        console.log(3)
         this._loading = false;
         if (!data.data) {
           return;
