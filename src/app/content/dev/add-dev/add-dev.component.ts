@@ -46,6 +46,7 @@ export class AddDevComponent implements OnInit {
       cid: [null],
       devTypeId: [null, [Validators.required]],
       devStatus: [null, [Validators.required]],
+      currFirmVersion: [null],
       seriesNumber: [null, [Validators.required]],
       clientSecret: [null, [Validators.required]],
       _regDate: [null],

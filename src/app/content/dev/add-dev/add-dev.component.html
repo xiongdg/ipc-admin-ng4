@@ -41,6 +41,16 @@
         <div nz-form-explain *ngIf="validateForm.controls.devStatus.dirty&&validateForm.controls.devStatus.hasError('required')">Please input your devStatus!</div>
       </div>
     </div>
+
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="7">
+        <label>设备固件版本</label>
+      </div>
+      <div nz-form-control [nzValidateStatus]="validateForm.controls.currFirmVersion" nz-col [nzSpan]="17">
+        <nz-input formControlName="currFirmVersion" [nzPlaceHolder]="'currFirmVersion'" [nzSize]="'default'"></nz-input>
+      </div>
+    </div>
+
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="7">
         <label nz-form-item-required>设备序列号</label>
