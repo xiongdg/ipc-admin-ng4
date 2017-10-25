@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
-  baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';  // mock数据路径
+  // baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';  // mock数据路径
   // baseUrl = '/kinzo-admin/'; // 部署路径
-  // baseUrl = '/kinzo-admin-test/'; // 部署路径
+  baseUrl = '/kinzo-admin-test/'; // 部署路径
   constructor(public http: Http, private router: Router, private storeService: StoreService) { }
 
   getData(url: string, data: any): Observable<any> {

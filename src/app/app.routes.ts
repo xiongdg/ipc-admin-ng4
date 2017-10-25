@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 export const appRoutes = [
   {
     path: 'user',
-    canActivate: [AuthGardGuard],
+    // canActivate: [AuthGardGuard],
     loadChildren: './user-login/user-login.module#UserLoginModule'
   },
   {

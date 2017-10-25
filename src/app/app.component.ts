@@ -20,11 +20,10 @@ export class AppComponent {
 
   }
 
-  ngOnInit() {console.log('ngOninit')
+  ngOnInit() {
     // 自动登录,用于路灯系统
     this.httpService.getData('admin/login.do', {username: 'admin', password: 'admin'})
     .subscribe(data => {
-      console.log(1);
       if (data.code === 200) {
         // 将登录标识设置为true、路由跳转至内容页
         this.storeService.setItem('accessToken', 1);
@@ -35,7 +34,6 @@ export class AppComponent {
     // 第一时间判断登录状态、设置isloggedin值
     this.httpService.getData('admin/checkLogin.do', '')
       .subscribe(res => {
-        console.log(2);
         if (res.data.isLogin === 1) {
           this.accesstokenService.accessToken = true;
         } else if (res.data.isLogin === 0) {

@@ -34,17 +34,10 @@ export class AuthGardGuard implements CanActivate, CanActivateChild {
   getLogin(url: string, observer) {
     this.http.getData('admin/checkLogin.do', '')
       .subscribe((res) => {
-        console.log(url)
-        if (res.data.isLogin === 1 && url === '/user/login') {   // 已登录阻止前往登录页
-          console.log('a')
-          this.router.navigate(['user-list']);    // 重定向至首页
-          observer.next(false);                   // 阻止跳转
-        } else if (res.data.isLogin === 0 && url !== '/user/login') {                 // 未登录阻止前往内容页
-          console.log('b');
+        if (res.data.isLogin === 0 && url !== '/user/login') {                 // 未登录阻止前往内容页
           this.router.navigate(['user/login']);   // 重定向至登录页
           observer.next(false);
         } else {
-          console.log('c')
           observer.next(true)
         }
         observer.complete();
@@ -53,9 +46,9 @@ export class AuthGardGuard implements CanActivate, CanActivateChild {
 
   checkLogin(url: string, observer) {
     if (token) { // 已登录
-      this.getLogin(url, observer)  // 已登录则直接获取登录状态并返回true/false
+      this.getLogin(url, observer)  // 已登录则直接获取登录状态并返回guard认证结果true/false
     } else {                                                  // 未登录则先登录再检测登录状态
-      this.login(url, observer)     // 未登录则先登录，然后获取登录状态并返回true/false
+      this.login(url, observer)     // 未登录则先登录，然后获取登录状态并返回guard认证结果true/false
     }
   }
 
