@@ -1,4 +1,3 @@
-import { AccesstokenService } from './service/accesstoken.service';
 import { HttpService } from './service/http.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,7 +12,6 @@ export class AppComponent {
   title = 'app';
   constructor(
     private httpService: HttpService,
-    private accesstokenService: AccesstokenService,
     private router: Router,
     private storeService: StoreService,
   ) {
@@ -35,9 +33,9 @@ export class AppComponent {
     this.httpService.getData('admin/checkLogin.do', '')
       .subscribe(res => {
         if (res.data.isLogin === 1) {
-          this.accesstokenService.accessToken = true;
+          window.localStorage.setItem('assessToken', '1')
         } else if (res.data.isLogin === 0) {
-          this.accesstokenService.accessToken = false;
+          window.localStorage.setItem('accessToken', '0')
         }
       });
   }

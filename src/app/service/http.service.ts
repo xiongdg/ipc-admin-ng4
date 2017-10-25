@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
-  // baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';  // mock数据路径
+  baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';  // mock数据路径
   // baseUrl = '/kinzo-admin/'; // 部署路径
-  baseUrl = '/kinzo-admin-test/'; // 部署路径
+  // baseUrl = '/kinzo-admin-test/'; // 部署路径
   constructor(public http: Http, private router: Router, private storeService: StoreService) { }
 
   getData(url: string, data: any): Observable<any> {
@@ -27,7 +27,7 @@ export class HttpService {
         if (res.json().code === 500) {  // 如果有错误
           if (res.json().errorCode === 2002) { // 未登录
             // 将登录标识设置为false、路由跳转至登录页
-            this.storeService.setItem('accessToken', 0);
+            this.storeService.setItem('accessToken', '0');
             this.router.navigate(['user/login']);
           }
         }

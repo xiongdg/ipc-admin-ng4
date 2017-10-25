@@ -1,4 +1,3 @@
-import { AccesstokenService } from './service/accesstoken.service';
 import { AuthGardGuard } from './gard/auth-gard.guard';
 import { StoreService } from './service/store.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,7 +27,7 @@ import { HttpService } from './service/http.service';
     ),
     ReactiveFormsModule
   ],
-  providers: [HttpService, StoreService, AuthGardGuard, AccesstokenService],     // TODO
+  providers: [HttpService, StoreService, AuthGardGuard],     // TODO
   bootstrap: [AppComponent]
 })
 export class AppModule { }
