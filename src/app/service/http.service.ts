@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 @Injectable()
 export class HttpService {
   baseUrl = 'https://easy-mock.com/mock/59b21369e0dc663341a1f9fd/ipc/';  // mock数据路径
-  // baseUrl = 'http://192.168.1.101/kinzo-admin/';  // 开发路径(shiyuan)
-  // baseUrl = 'http://192.168.2.92:8080/kinzo-admin/'; // 开发路径（yibo）
   // baseUrl = '/kinzo-admin/'; // 部署路径
   // baseUrl = '/kinzo-admin-test/'; // 部署路径
   constructor(public http: Http, private router: Router, private storeService: StoreService) { }
@@ -48,7 +46,7 @@ export class HttpService {
         if (res.json().code === 500) {  // 如果有错误
           switch (res.json().errorCode) {
             case 2002:          // 未登录
-              this.storeService.setItem('accessToken', 0);
+              this.storeService.setItem('accessToken', '0');
               this.router.navigate(['user/login']);
               break;
               // case 2000: 

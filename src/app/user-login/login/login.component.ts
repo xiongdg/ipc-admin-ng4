@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
     this.httpService.getData('admin/login.do', this.validateForm.value)
       .subscribe(data => {
         if (data.code === 200) {
-          // 将登录标识设置为true、路由跳转至内容页
-          this.storeService.setItem('accessToken', 1);
+          // 将登录标识设置为'1'、路由跳转至内容页
+          this.storeService.setItem('accessToken', '1');
           this.router.navigate(['user-list']);
         } else {
           this.btnText = '登录';

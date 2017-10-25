@@ -69,8 +69,8 @@ export class ContentComponent implements OnInit {
   logOut() {
     this.httpService.getData('admin/logout.do', '')
       .subscribe(res => {
-        // 将登录标识设置为false、跳转至登录页
-        this.storeService.setItem('accessToken', 0);
+        // 将登录标识设置为'0'、跳转至登录页
+        this.storeService.setItem('accessToken', '0');
         this.router.navigate(['user/login']);
       });
   }

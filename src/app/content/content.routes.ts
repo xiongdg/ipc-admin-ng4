@@ -19,7 +19,7 @@ export const contentRoutes = [
   {
     path: '',
     component: ContentComponent,
-    canActivateChild: [AuthGardGuard],
+    // canActivateChild: [AuthGardGuard], // 子组件间跳转暂时不做检测了
     children: [
       { path: '', redirectTo: 'user-list' },
       { path: 'lamp-status', component: LampStatusComponent },
