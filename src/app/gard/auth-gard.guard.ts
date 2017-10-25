@@ -23,7 +23,7 @@ export class AuthGardGuard implements CanActivate, CanActivateChild {
     // 再此处判断登录状态。如果未登录将路由导至登录路由。已登录则判断是否在跳往登录，如果是则导至首页
     const url: string = state.url;
     return new Observable((observer) => {
-      this.checkLogin(url, observer)
+      this.getLogin(url, observer)
     })
   }
 
@@ -34,10 +34,13 @@ export class AuthGardGuard implements CanActivate, CanActivateChild {
   getLogin(url: string, observer) {
     this.http.getData('admin/checkLogin.do', '')
       .subscribe((res) => {
+        console.log('a')
         if (res.data.isLogin === 0 && url !== '/user/login') {                 // 未登录阻止前往内容页
+          console.log('未登录')
           this.router.navigate(['user/login']);   // 重定向至登录页
           observer.next(false);
         } else {
+          console.log('已登录');
           observer.next(true)
         }
         observer.complete();
@@ -48,7 +51,7 @@ export class AuthGardGuard implements CanActivate, CanActivateChild {
     if (token) { // 已登录
       this.getLogin(url, observer)  // 已登录则直接获取登录状态并返回guard认证结果true/false
     } else {                                                  // 未登录则先登录再检测登录状态
-      this.login(url, observer)     // 未登录则先登录，然后获取登录状态并返回guard认证结果true/false
+      this.getLogin(url, observer)     // 未登录则先登录，然后获取登录状态并返回guard认证结果true/false
     }
   }
 
