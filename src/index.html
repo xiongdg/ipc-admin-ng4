@@ -1,14 +1,41 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
+  <!-- 设置360浏览器默认使用webkit内核 -->
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>ipc-admin</title>
   <base href="./">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Polyfill(s) for older browsers -->
+  <!-- 检测ie版本  -->
+  <script>
+    var DEFAULT_VERSION = "8.0";
+    var ua = navigator.userAgent.toLowerCase();
+    var isIE = ua.indexOf("msie") > -1;
+    var safariVersion;
+    if (isIE) {
+      safariVersion = ua.match(/msie ([\d.]+)/)[1];
+      if (safariVersion <= DEFAULT_VERSION) {
+        // 低于ie8
+        document.write("<h1>你的浏览器版本过低，请切换更高级浏览器重新访问</h1>");
+      } else {
+        // 跳转至页面2
+      }
+    } else {
+      // 跳转至页面2
+    }
+  </script>
+  <script src="./assets/polyfill/core.js"></script>
+  <script src="./assets/polyfill/classList.js"></script>
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>

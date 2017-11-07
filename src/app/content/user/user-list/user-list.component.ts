@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit {
   _title = false;       // 表格样式
   _footer = false;      // 表格底部
   _size = 'middle';     // 表格样式
-  _loading = false;     // 表格更新数据动画
+  _loading = true;     // 表格更新数据动画
 
   _dataSet = [];        // 表格数据
   // 查询数据
