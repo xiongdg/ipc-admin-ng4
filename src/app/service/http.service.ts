@@ -29,6 +29,8 @@ export class HttpService {
             // 将登录标识设置为false、路由跳转至登录页
             this.storeService.setItem('accessToken', '0');
             this.router.navigate(['user/login']);
+          }else{
+            alert(res.json().errorMessage);
           }
         }
         return res.json();
@@ -49,7 +51,7 @@ export class HttpService {
               this.storeService.setItem('accessToken', '0');
               this.router.navigate(['user/login']);
               break;
-              // case 2000: 
+            // case 2000: 
           }
           // if (res.json().errorCode === 2002) { // 未登录
           //   // 将登录标识设置为false、路由跳转至登录页
