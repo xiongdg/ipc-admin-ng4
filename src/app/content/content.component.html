@@ -8,27 +8,47 @@
         <!-- <li nz-menu-item routerLink="/lamp-status"><span><i class="iconfont icon-ludeng"></i><span class="nav-text">路灯实时监测</span></span>
         </li> -->
         <li nz-submenu [(nzOpen)]="isOpenOne" (nzOpenChange)="openChange('one')">
-          <span title><i class="iconfont icon-yonghu"></i><span class="nav-text">用户管理</span></span>
+          <span title>
+            <i class="iconfont icon-yonghu"></i>
+            <span class="nav-text">用户管理</span>
+          </span>
           <ul>
             <li nz-menu-item routerLink="/user-list" routerLinkActive="ant-menu-item-selected">用户列表</li>
             <li nz-menu-item routerLink="/add-user" routerLinkActive="ant-menu-item-selected">新建用户</li>
           </ul>
         </li>
         <li nz-submenu [(nzOpen)]="isOpenTwo" (nzOpenChange)="openChange('two')">
-          <span title><i class="iconfont icon-shebeileijiankongdian"></i><span class="nav-text">设备管理</span></span>
+          <span title>
+            <i class="iconfont icon-shebeileijiankongdian"></i>
+            <span class="nav-text">设备管理</span>
+          </span>
           <ul>
             <li nz-menu-item routerLink="/dev-list" routerLinkActive="ant-menu-item-selected">设备列表</li>
             <li nz-menu-item routerLink="/add-dev" routerLinkActive="ant-menu-item-selected">新建设备</li>
           </ul>
         </li>
         <li nz-submenu [(nzOpen)]="isOpenThree" (nzOpenChange)="openChange('three')">
-          <span title><i class="iconfont icon-shebeileijiankongdianbaojing" routerLinkActive="ant-menu-item-selected"></i><span class="nav-text">设备型号管理</span></span>
+          <span title>
+            <i class="iconfont icon-shebeileijiankongdianbaojing" routerLinkActive="ant-menu-item-selected"></i>
+            <span class="nav-text">设备型号管理</span>
+          </span>
           <ul>
             <li nz-menu-item routerLink="/dev-type-list" routerLinkActive="ant-menu-item-selected">设备型号列表</li>
             <li nz-menu-item routerLink="/add-dev-type" routerLinkActive="ant-menu-item-selected">新增设备型号</li>
           </ul>
         </li>
-        <!-- 报表和用户管理暂时没有
+
+        <li nz-submenu [(nzOpen)]="isOpenSix" (nzOpenChange)="openChange('six')">
+          <span title>
+            <i class="iconfont icon-app"></i>
+            <span class="nav-text">app&升级管理</span>
+          </span>
+          <ul>
+            <li nz-menu-item routerLink="/app-list" routerLinkActive="ant-menu-item-selected">app列表</li>
+            <li nz-menu-item routerLink="/add-app" routerLinkActive="ant-menu-item-selected">新增app</li>
+          </ul>
+        </li>
+        <!-- 报表和用户管理暂时没有 -->
         <li nz-submenu [(nzOpen)]="isOpenFour" (nzOpenChange)="openChange('four')">
           <span title><i class="anticon anticon-user"></i><span class="nav-text">报表管理</span></span>
           <ul>
@@ -44,18 +64,13 @@
             <li nz-menu-item routerLink="/user-list">系统参数</li>
           </ul>
         </li>
-      -->
-        <li nz-submenu [(nzOpen)]="isOpenSix" (nzOpenChange)="openChange('six')">
-          <span title><i class="iconfont icon-app"></i><span class="nav-text">app&升级管理</span></span>
-          <ul>
-            <li nz-menu-item routerLink="/app-list" routerLinkActive="ant-menu-item-selected">app列表</li>
-            <li nz-menu-item routerLink="/add-app" routerLinkActive="ant-menu-item-selected">新增app</li>
-          </ul>
-        </li>
+     
         <!-- <li nz-menu-item><span><i class="iconfont icon-kongqijianceyi-"></i><span class="nav-text">空气检测</span></span>
         </li> -->
       </ul>
-      <div id="logout"><span (click)="logOut()">退出登录</span> </div>
+      <div id="logout">
+        <span (click)="logOut()">退出登录</span>
+      </div>
     </nz-sider>
     <nz-layout>
       <nz-content style="margin:16px;">
