@@ -41,14 +41,17 @@ export class AddAppComponent implements OnInit {
     this.httpService.getData('appType/updateAppType.do', this.validateForm.value)
       .subscribe(res => {
         if (res.code === 200) {
-          this.btnText = '新增';
           // 提交成功
+          this.isLoading = false;
+          this.btnText = '新增';
           const modal = this.confirmServ.success({
             content: '新建完成'
           });
           setTimeout(() => modal.destroy(), 1000);
         } else {
           // 提交失败
+          this.isLoading = false;
+          this.btnText = '新增';
           const modal = this.confirmServ.warning({
             content: res.code
           });
