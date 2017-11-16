@@ -48,8 +48,9 @@ export class AddUserComponent implements OnInit {
     this.httpService.getData('user/addUser.do', this.validateForm.value)
       .subscribe(res => {
         if (res.code === 200) {
-          this.btnText = '新增';
           // 提交成功
+          this.isLoading = false;
+          this.btnText = '新增';
           const modal = this.confirmServ.success({
             content: '新建完成'
           });
