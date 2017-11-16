@@ -49,6 +49,7 @@ export class AddUserComponent implements OnInit {
       .subscribe(res => {
         if (res.code === 200) {
           this.btnText = '新增';
+          this.isLoading = false;
           // 提交成功
           const modal = this.confirmServ.success({
             content: '新建完成'
