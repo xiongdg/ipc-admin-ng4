@@ -54,16 +54,7 @@
 
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="7">
-        <label>设备cid</label>
-      </div>
-      <div nz-form-control [nzValidateStatus]="validateForm.controls.cid" nz-col [nzSpan]="17">
-        <nz-input formControlName="cid" [nzPlaceHolder]="'cid'" [nzSize]="'default'"></nz-input>
-      </div>
-    </div>
-
-    <div nz-form-item nz-row>
-      <div nz-form-label nz-col [nzSpan]="7">
-        <label nz-form-item-required>出厂日期</label>
+        <label>出厂日期</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls._regDate" nz-col [nzSpan]="17">
         <nz-datepicker style="width:100%;" formControlName="_regDate" [nzSize]="'default'">

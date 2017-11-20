@@ -10,4 +10,4 @@
 修改新增完成后，新增按钮状态未重置的bug
 
 ### 2017.11.20
-新增设备页添加cid选填框，并将p2pID 和 p2pSecret设置为选填。且如果p2pID、cid为空，则将其值设置为seriesNumber；如果p2pSecret值为空，将其设置为clientSecret
+新增设备页将p2pID 和 p2pSecret设置为选填。且如果p2pID，则将其值设置为seriesNumber；如果p2pSecret值为空，将其设置为clientSecret

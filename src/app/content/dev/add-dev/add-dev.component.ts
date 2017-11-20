@@ -48,7 +48,7 @@ export class AddDevComponent implements OnInit {
       devStatus: [null, [Validators.required]],
       seriesNumber: [null, [Validators.required]],
       clientSecret: [null, [Validators.required]],
-      _regDate: [null, [Validators.required]],
+      _regDate: [null],
       initStreamPk: [null, [Validators.required]],
       p2pID: [null],
       p2pSecret: [null]
@@ -57,18 +57,20 @@ export class AddDevComponent implements OnInit {
 
   add() {
     
-    // 检测p2pID(seriesNumber)和p2pSecret(clientSecret)和cid(seriesNumber)如果为空，则将其值设置为seriesNumber、clientSecret、seriesNumber
+    // 检测p2pID(seriesNumber)和p2pSecret(clientSecret)如果为空，则将其值设置为seriesNumber、clientSecret
     if(!this.validateForm.value.p2pID){
       this.validateForm.value.p2pID = this.validateForm.value.seriesNumber
-    }
-    if(!this.validateForm.value.cid){
-      this.validateForm.value.cid = this.validateForm.value.seriesNumber
     }
     if(!this.validateForm.value.p2pSecret){
       this.validateForm.value.p2pSecret = this.validateForm.value.clientSecret
     }
+    console.log(this.validateForm.value._regDate)
+    if(this.validateForm.value._regDate){ // 日期不为空时，将时间格式转换为时间戳
+      this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
+    }else{
+      this.validateForm.value.regDate = null
+    }
     this.active = false;  // 阻止连续点击
-    this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
     this.btnText = '正在提交';
     this.httpService.getData('dev/addDev.do', this.validateForm.value)
       .subscribe(res => {
