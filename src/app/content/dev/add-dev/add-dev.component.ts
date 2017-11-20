@@ -46,19 +46,31 @@ export class AddDevComponent implements OnInit {
       cid: [null],
       devTypeId: [null, [Validators.required]],
       devStatus: [null, [Validators.required]],
-      currFirmVersion: [null],
       seriesNumber: [null, [Validators.required]],
       clientSecret: [null, [Validators.required]],
       _regDate: [null],
       initStreamPk: [null, [Validators.required]],
-      p2pID: [null, [Validators.required]],
-      p2pSecret: [null, [Validators.required]]
+      p2pID: [null],
+      p2pSecret: [null]
     });
   }
 
   add() {
+    
+    // 检测p2pID(seriesNumber)和p2pSecret(clientSecret)如果为空，则将其值设置为seriesNumber、clientSecret
+    if(!this.validateForm.value.p2pID){
+      this.validateForm.value.p2pID = this.validateForm.value.seriesNumber
+    }
+    if(!this.validateForm.value.p2pSecret){
+      this.validateForm.value.p2pSecret = this.validateForm.value.clientSecret
+    }
+    console.log(this.validateForm.value._regDate)
+    if(this.validateForm.value._regDate){ // 日期不为空时，将时间格式转换为时间戳
+      this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
+    }else{
+      this.validateForm.value.regDate = null
+    }
     this.active = false;  // 阻止连续点击
-    this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
     this.btnText = '正在提交';
     this.httpService.getData('dev/addDev.do', this.validateForm.value)
       .subscribe(res => {
