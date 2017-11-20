@@ -43,18 +43,30 @@ export class AddDevComponent implements OnInit {
       });
 
     this.validateForm = this.fb.group({
+      cid: [null],
       devTypeId: [null, [Validators.required]],
       devStatus: [null, [Validators.required]],
       seriesNumber: [null, [Validators.required]],
       clientSecret: [null, [Validators.required]],
       _regDate: [null, [Validators.required]],
       initStreamPk: [null, [Validators.required]],
-      p2pID: [null, [Validators.required]],
-      p2pSecret: [null, [Validators.required]]
+      p2pID: [null],
+      p2pSecret: [null]
     });
   }
 
   add() {
+    
+    // 检测p2pID(seriesNumber)和p2pSecret(clientSecret)和cid(seriesNumber)如果为空，则将其值设置为seriesNumber、clientSecret、seriesNumber
+    if(!this.validateForm.value.p2pID){
+      this.validateForm.value.p2pID = this.validateForm.value.seriesNumber
+    }
+    if(!this.validateForm.value.cid){
+      this.validateForm.value.cid = this.validateForm.value.seriesNumber
+    }
+    if(!this.validateForm.value.p2pSecret){
+      this.validateForm.value.p2pSecret = this.validateForm.value.clientSecret
+    }
     this.active = false;  // 阻止连续点击
     this.validateForm.value.regDate = this.validateForm.value._regDate.getTime();
     this.btnText = '正在提交';

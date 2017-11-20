@@ -54,6 +54,15 @@
 
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="7">
+        <label>设备cid</label>
+      </div>
+      <div nz-form-control [nzValidateStatus]="validateForm.controls.cid" nz-col [nzSpan]="17">
+        <nz-input formControlName="cid" [nzPlaceHolder]="'cid'" [nzSize]="'default'"></nz-input>
+      </div>
+    </div>
+
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="7">
         <label nz-form-item-required>出厂日期</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls._regDate" nz-col [nzSpan]="17">
@@ -75,20 +84,18 @@
     </div>
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="7">
-        <label nz-form-item-required>p2pID</label>
+        <label>p2pID</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.p2pID" nz-col [nzSpan]="17">
         <nz-input formControlName="p2pID" [nzPlaceHolder]="'p2pID'" [nzSize]="'default'"></nz-input>
-        <div nz-form-explain *ngIf="validateForm.controls.p2pID.dirty&&validateForm.controls.p2pID.hasError('required')">Please input your p2pID!</div>
       </div>
     </div>
     <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="7">
-        <label nz-form-item-required>p2pSecret</label>
+        <label>p2pSecret</label>
       </div>
       <div nz-form-control [nzValidateStatus]="validateForm.controls.p2pSecret" nz-col [nzSpan]="17">
         <nz-input formControlName="p2pSecret" [nzPlaceHolder]="'p2pSecret'" [nzSize]="'default'"></nz-input>
-        <div nz-form-explain *ngIf="validateForm.controls.p2pSecret.dirty&&validateForm.controls.p2pSecret.hasError('required')">Please input your Password!</div>
       </div>
     </div>
     <div nz-form-item nz-row>
