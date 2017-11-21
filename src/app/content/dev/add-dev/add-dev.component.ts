@@ -9,6 +9,8 @@ import { NzModalService } from 'ng-zorro-antd';
   styleUrls: ['./add-dev.component.css']
 })
 export class AddDevComponent implements OnInit {
+  btnText = '新增';
+  isLoading = false;
   validateForm: FormGroup;
   p2pProOptions;
   devStatusOptions = [
@@ -18,8 +20,7 @@ export class AddDevComponent implements OnInit {
     { label: '失效', value: 'invalid' }
   ];
   devTypeListOptions;
-  btnText = '新增';
-  active = true;
+  // active = true;
   constructor(
     private fb: FormBuilder,
     private httpService: HttpService,
@@ -70,26 +71,26 @@ export class AddDevComponent implements OnInit {
     }else{
       this.validateForm.value.regDate = null
     }
-    this.active = false;  // 阻止连续点击
     this.btnText = '正在提交';
     this.httpService.getData('dev/addDev.do', this.validateForm.value)
       .subscribe(res => {
-        this.active = true;
+        // this.active = true;
         if (res.code === 200) {
-          this.btnText = '提交';
           // 提交成功
+          this.btnText = '新增';
+          this.isLoading = false;
           const modal = this.confirmServ.success({
-            // title: '',
             content: '新建完成'
           });
           setTimeout(() => modal.destroy(), 1000);
         } else {
           // 提交失败
+          this.isLoading = false;
+          this.btnText = '新增';
           const modal = this.confirmServ.warning({
-            // title: '',
-            content: '新增失败'
+            content: res.errorMessage
           });
-          setTimeout(() => modal.destroy(), 1000);
+          // setTimeout(() => modal.destroy(), 1000);
         }
       });
   }

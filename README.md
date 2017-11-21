@@ -11,3 +11,6 @@
 
 ### 2017.11.20
 新增设备页将p2pID 和 p2pSecret设置为选填。且如果p2pID，则将其值设置为seriesNumber；如果p2pSecret值为空，将其设置为clientSecret
+
+### 2017.11.21
+修改新增设备页面，新增失败后，按钮状态未重置的bug
