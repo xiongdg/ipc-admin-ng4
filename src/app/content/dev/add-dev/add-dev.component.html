@@ -91,7 +91,7 @@
     </div>
     <div nz-form-item nz-row>
       <div nz-form-control nz-col [nzOffset]="7">
-        <button nz-button class="login-form-button" [disabled]="!validateForm.valid || !active" [nzType]="'primary'" [nzSize]="'default'"
+        <button nz-button class="login-form-button" [disabled]="!validateForm.valid" [nzType]="'primary'" [nzSize]="'default'" [nzLoading]="isLoading"
           style="width:100%">{{ btnText }}</button>
       </div>
     </div>
