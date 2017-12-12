@@ -1,3 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 .bread-crumb{line-height: 50px;border-bottom: 1px solid #ddd; margin-bottom: 20px;}
 @import '//at.alicdn.com/t/font_408834_lijki0mzbzqia4i.css';
+table tr:nth-child(2n){background: rgb(250, 250, 250)}
