@@ -16,49 +16,53 @@ export class UserListComponent implements OnInit {
   _title = false;       // 表格样式
   _footer = false;      // 表格底部
   _size = 'middle';     // 表格样式
-  _loading = true;     // 表格更新数据动画
+  _loading = true;      // 表格更新数据动画
 
+  _total = 1;           // 数据总条数
   _dataSet = [];        // 表格数据
   // 查询数据
-  // queryData = new QueryData();
   queryData = {
     query: '',
     userNameStatus: '',
     startTime: null,
     endTime: null,
     startPage: 1,
-    pageSize: 10
+    pageSize: 20
   };
   userNameStatuses = [
     { label: '激活', value: 'active' },
     { label: '未激活', value: 'inactive' },
     { label: '失效', value: 'invalid' }
   ];
-  nextCanUse = true;          // 配合my-pagination组件，是否有下一页
   constructor(private httpService: HttpService, private storeService: StoreService) { }
 
   ngOnInit() {
     // 从localstorage获取每页条数
     this.queryData.pageSize = Number(this.storeService.getItem('itemPerPage_userList')) || 10;
-    this.getData();
+    this.getData(true);
   }
-
+  // 刷新数据
   refreshData(val) {
     this._loading = true;
-    this.nextCanUse = true;
-    if (val === 'itemChange') { // 如果是修改了每页条数，那么重新设置localstorage存的页码
-      this.storeService.setItem('itemPerPage_userList', this.queryData.pageSize);
-    }
     this.getData();
+    if (val) {  // 将新的每页条数存入storage
+      this.storeService.setItem('itemPerPage_userList', this.queryData.pageSize)
+    }
   }
-
+  /**
+   * 搜索
+   * 获取数据同时刷新总条数
+   */
   doSearch() {
     this._loading = true;
     this.queryData.startPage = 1;
-    this.nextCanUse = true;
-    this.getData();
+    this.getData(true);
   }
-  getData() {
+  /**
+   * 获取数据
+   * @param needTotalItem 为true时同时刷新总条数
+   */
+  getData(needTotalItem: boolean = false) {
     // 保存一下开始时间和结束时间
     const startTime = this.queryData.startTime;
     const endTime = this.queryData.endTime;
@@ -68,27 +72,34 @@ export class UserListComponent implements OnInit {
     if (this.queryData.endTime) {
       this.queryData.endTime = this.queryData.endTime.getTime();
     }
-    this.httpService.getData('user/queryUserList.do', this.queryData) // 刷新数据
+    // 浅拷贝请求参数
+    const queryData = { ...this.queryData }
+    console.log(queryData)
+    if (needTotalItem) {  // 是否需要请求总条数
+      this.getTotalItem(queryData)
+    }
+    this.httpService.getData('user/queryUserList.do', queryData) // 刷新数据
       .subscribe((data) => {
         this._loading = false;
         if (!data.data) {
           return;
         }
-        if (data.data.devList === null) {
-          data.data.users = [];
-        }
-        if (data.data.users.length < Number(this.queryData.pageSize)) {
-          this.nextCanUse = false;
-        } else {
-          this.nextCanUse = true;
-        }
         this._dataSet = data.data.users;
+        console.log(this._dataSet)
+        this._loading = false
         // 将时间重新赋值给queryData.startTime
         this.queryData.startTime = startTime;
         this.queryData.endTime = endTime;
       });
   }
 
+  // 获取总条数
+  getTotalItem(queryData) {
+    this.httpService.getData('user/queryUserListTotalItems.do', queryData) // 同样的参数
+      .subscribe(data => {
+        this._total = Number(data.data)
+      })
+  }
   // 下面为datePicker设置
   newArray = (len) => {
     const result = [];
